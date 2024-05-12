@@ -9,7 +9,7 @@ export const images = {
   arrowCurve: require("./ArrowCurve.png"),
   arrowStraight: require("./arrowStraight.png"),
   blueCircleGrad: require("./blueCircleGrad.png"),
-  blueCircleMedium: require("./blueCirlceMedium.png"),
+  blueCircleMedium: require("./blueCircleMedium.png"),
   blueCircleSolid: require("./blueCircleSolid.png"),
   bulb: require("./bulbImage.png"),
   clients: require("./clients.png"),
@@ -22,5 +22,7 @@ export const images = {
   textRectangle: require("./textRectangle.png"),
   user: require("./user.png"),
   ring: require("./circle.png"),
-  net2:require("./net2.png"),
+  net2: require("./net2.png"),
+  net3: require("./net3.png"),
+  submit: require("./submitIcon.png"),
 };

@@ -9,7 +9,16 @@ body {
   scroll-behavior: smooth;
   overflow-x: hidden;
 }
-
+.text1_gradient {
+  background: linear-gradient(to right, #91bbf5, #cc886c);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.text2_gradient {
+  background: linear-gradient(to right, #FDF77D, #3D6DCB);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 ::-webkit-scrollbar {
   width: 12px;
 }
