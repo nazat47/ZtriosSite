@@ -1,12 +1,9 @@
 import React from "react";
-import { MdEmail } from "react-icons/md";
-import { FaPhoneAlt } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
 import Header from "../components/Header";
 import { images } from "../assets";
 import Ratings from "../components/Ratings";
-import { navbarLinks } from "../utils/links";
-import { Link } from "react-router-dom";
+import Footer from "../components/Footer";
 
 export default function Landing() {
   return (
@@ -84,9 +81,7 @@ export default function Landing() {
           Contact Us <FaArrowRightLong className="fill-white" />
         </button>
       </div>
-      <div
-        className="w-full h-[600px] relative border-[3px] border-black rounded-xl mt-20 shadow-custom bg-white"
-      >
+      <div className="w-full h-[600px] relative border-[3px] border-black rounded-xl mt-20 shadow-custom bg-white">
         {/* ----background images (gradients,ring, stars etc.)----- */}
         <img
           src={images?.blueCircleGrad}
@@ -563,19 +558,19 @@ export default function Landing() {
                   name="lastName"
                   placeholder="Email"
                   className="p-3 w-full bg-[#0a0a0a] rounded-lg border border-gray-600"
-                  />
+                />
                 <input
                   type="text"
                   name="lastName"
                   placeholder="Phone Number"
                   className="p-3 w-full bg-[#0a0a0a] rounded-lg border border-gray-600"
-                  />
+                />
                 <textarea
                   name="lastName"
                   placeholder="Message"
                   rows={5}
-                  className="p-3 w-full bg-[#0a0a0a] rounded-lg border border-gray-600"
-                  />
+                  className="p-3 w-full bg-[#0a0a0a] rounded-lg border border-gray-600 resize-none"
+                />
                 <button
                   type="submit"
                   className="p-3 w-full bg-gradient-to-r from-blue-900 to-purple-600 rounded-lg flex items-center justify-center gap-4 text-white hover:from-purple-900 hover:to-purple-600"
@@ -595,41 +590,7 @@ export default function Landing() {
           </div>
         </div>
       </div>
-      <div className="w-[80%] flex items-start justify-between mx-auto mt-[120px] p-6 ">
-        <div className="flex flex-col gap-4">
-          <img src={images?.logo} alt="logo" className="mt-3" />
-          <div className="flex gap-3">
-            <MdEmail className="fill-purple-600" />
-            <p>help@hrybix.com</p>
-          </div>
-          <div className="flex gap-3">
-            <FaPhoneAlt className="fill-purple-600" />
-            <p>+1 234 456 678 89</p>
-          </div>
-        </div>
-        <div className="flex flex-col gap-4">
-          <p className="text-[40px]">Links</p>
-          {navbarLinks?.map((link, i) => (
-            <Link to={link.url}>{link.name}</Link>
-          ))}
-        </div>
-        <div className="flex flex-col gap-4">
-          <p className="text-[40px]">Legal</p>
-          <p>Terms of Use</p>
-          <p>Privacy Policy</p>
-          <p>Cookie Policy</p>
-        </div>
-        <div className="flex flex-col gap-4">
-          <p className="text-[40px]">Product</p>
-          <p>Take Tour</p>
-          <p>Live Chat</p>
-          <p>Reviews</p>
-        </div>
-        <div className="flex flex-col gap-4">
-          <p className="text-[40px]">Newsletter</p>
-          <p>Stay Up To Date</p>
-        </div>
-      </div>
+      <Footer />
     </div>
   );
 }
