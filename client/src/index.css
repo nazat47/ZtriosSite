@@ -9,6 +9,7 @@ body {
   scroll-behavior: smooth;
   overflow-x: hidden;
 }
+
 .text1_gradient {
   background: linear-gradient(to right, #91bbf5, #cc886c);
   background-clip: text;
