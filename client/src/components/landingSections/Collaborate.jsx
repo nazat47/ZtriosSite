@@ -8,7 +8,7 @@ const Collaborate = () => {
         <img
           src={images?.net2}
           alt="net"
-          className="z-[-2] size-[500px] top-[-250px] right-[-300px] absolute opacity-80"
+          className="z-[-2] size-[300px] lg:size-[500px] top-[-150px] lg:top-[-250px] right-[-200px] lg:right-[-300px] absolute opacity-80"
         />
         <div className="flex flex-col md:flex-row gap-2 sm:gap-7 w-full">
           <div className="flex items-center justify-center bg-black text-gray-400 flex-1">

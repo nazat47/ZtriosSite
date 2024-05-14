@@ -27,7 +27,7 @@ const Header = ({ active }) => {
           <img
             src={images.logo}
             alt="Logo"
-            className="w-[20%] sm:w-[15%] md:w-[15%] md:h-[60%] lg:w-[20%] lg:h-[70%] lg:ml-4"
+            className="w-[20%] sm:w-[15%] md:w-[15%] md:h-[60%] lg:w-[20%] lg:h-[70%] lg:ml-4 xl:w-[15%]"
           />
           <div className="hidden sm:flex gap-4 lg:gap-6 items-center justify-center font-semibold text-xs md:text-md xl:text-xl cursor-pointer">
             {navbarLinks?.map((link, i) => (
@@ -40,13 +40,13 @@ const Header = ({ active }) => {
               </Link>
             ))}
           </div>
-          <button className="hidden sm:block font-semibold w-[15%] h-[100%] bg-black text-center rounded text-white text-xs md:text-sm lg:text-[md]">
+          <button className="hidden sm:block font-semibold w-[15%] h-[100%] bg-black text-center rounded text-white text-xs md:text-sm lg:text-[md] hover:bg-purple-900">
             Contact us
           </button>
           <CgMenuRight
             size={20}
             onClick={(e) => setOpen(true) || e.stopPropagation()}
-            className="cursor-pointer"
+            className="cursor-pointer sm:hidden"
           />
         </div>
       </div>

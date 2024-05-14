@@ -1,69 +1,88 @@
 import React from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { images } from "../../assets";
 import { FaArrowRightLong } from "react-icons/fa6";
 
 const Intro = () => {
+  const { scrollYProgress } = useScroll({
+    offset: ["start start", "end end"],
+  });
+  const imgMove = useTransform(scrollYProgress, [0, 1], ["0%", "200%"]);
+  const startMove = useTransform(scrollYProgress, [0, 1], ["0%", "1000%"]);
   return (
     <>
       <div className="w-full flex flex-col gap-2 sm:gap-4 md:gap-8 text-center items-center mt-12 md:mt-20 relative">
         {/* ----background images (gradients,ring, stars etc.)----- */}
-        <img
+        <motion.img
+          style={{ x: imgMove }}
           src={images?.blueCircleGrad}
           alt=""
-          className="z-[-2] absolute left-[-60%] top-[-100%] h-[70vh] w-[60vw]"
+          className="z-[-2] absolute top-[-300%] sm:top-[-220%] md:top-[-160%] lg:top-[-130%] left-[-40%] md:left-[-60%] xl:top-[-100%] h-[70vh] w-[60vw]"
         />
-        <img
+        <motion.img
+          style={{ x: imgMove }}
           src={images?.purpleCircleGrad}
           alt=""
-          className="z-[-2] absolute right-[-40vw] top-[-60vh] h-[90vh] w-[60vw]"
+          className="z-[-2] absolute right-[-45vw] top-[-50vh] sm:top-[-60vh] h-[70vh] sm:h-[90vh] w-[80vw] sm:w-[60vw]"
         />
-        <img
+        <motion.img
+          style={{ x: imgMove }}
           src={images?.ring}
           alt=""
-          className="z-[-2] absolute right-[-28%] top-[-30%] size-[25vw]"
+          className="z-[-2] absolute right-[-20%] md:right-[-28%] top-[-30%] size-[25vw]"
         />
-        <img
+        <motion.img
+          style={{ x: startMove }}
           src={images?.star}
           alt=""
-          className="z-[-2] absolute left-[-6%] top-0 size-[3vw]"
+          className="z-[-2] absolute left-0 md:left-[-6%] top-[-20%] sm:top-0 size-[3vw]"
         />
-        <img
+        <motion.img
+          style={{ x: imgMove }}
           src={images?.purpleCircleGrad}
           alt=""
-          className="z-[-2] absolute left-[-40%] top-[-20%] h-[120vh] w-[40vw] transform rotate-[270deg]"
+          className="z-[-2] absolute left-[-80%] sm:left-[-50%] md:left-[-50%] top-[40%] sm:top-[40%] md:top-[30%] lg:top-[20%] xl:top-[20%] h-[30vh] lg:h-[50vh] xl:h-[80vh] w-[70vw] lg:w-[60vw] transform rotate-120"
         />
-        <img
+        <motion.img
+          style={{ x: imgMove }}
           src={images?.blueCircleGrad}
           alt=""
-          className="z-[-2] absolute left-[-40%] top-[70%] h-[120vh] w-[40vw]"
+          className="z-[-3] absolute left-[-25%] md:left-[-30%] lg:left-[-40%] top-[30%] sm:top-[20%] md:top-[20%] lg:top-[70%] 2xl:top-[90%] h-[40vh] sm:h-[60vh] w-[40vw]"
         />
-        <img
+        <motion.img
+          style={{ x: imgMove }}
           src={images?.ring}
           alt=""
-          className="z-[-2] absolute left-[-30%] top-[40%] size-[25vw] transfrom -rotate-90"
+          className="z-[-2] absolute left-[-15%] md:left-[-30%] top-[60%] xl:top-[40%] size-[25vw] transfrom -rotate-90"
         />
         <img
           src={images?.net2}
           alt="net"
-          className="z-[-2] absolute right-[-25%] top-[70%] size-[20vw] transfrom -rotate-90 opacity-70"
+          className="z-[-2] absolute right-[-10%] md:right-[-20%] xl:right-[-25%] top-[90%] sm:top-[70%] size-[20vw] transfrom -rotate-90 opacity-70"
         />
-        <img
+        <motion.img
+          style={{ x: startMove }}
           src={images?.star}
           alt="net"
-          className="z-[-2] absolute right-[-5%] top-[90%] size-[3vw] transfrom -rotate-90"
+          className="z-[-2] absolute right-0 md:right-[-5%] top-[100%] sm:top-[90%] size-[3vw] transfrom -rotate-90"
         />
         {/* --------- */}
         <div className="flex justify-center w-full sm:w-[90%] md:w-[80%] relative">
           <img
             src={images?.net}
             alt="net"
-            className="z-[-2] h-[30vh] top-[10%] absolute opacity-50"
+            className="z-[-2] h-[15vh] sm:h-[20vh] md:h-[30vh] top-[10%] absolute opacity-50"
           />
           <h1 className="text-[20px] sm:text-[30px] md:text-[35px] lg:text-[50px] xl:text-[65px] font-bold leading-[120%]">
             Is Your Business Equipped to Conquer the Challenges of{" "}
             <span className="relative">
               Tomorrow?
-              <div className="absolute h-[10px] sm:h-[20px] lg:h-[40px] w-full bg-[#00FFAE] bottom-2 lg-bottom-2 xl:bottom-4 right-0 z-[-1]"></div>
+              <motion.div
+                initial={{ width: "0" }}
+                animate={{ width: "100%" }}
+                transition={{ duration: 0.8, ease: "easeInOut", delay: 0.3 }}
+                className="absolute h-[10px] sm:h-[20px] lg:h-[40px] w-full bg-[#00FFAE] bottom-2 xl:bottom-4 left-0 z-[-1]"
+              ></motion.div>
             </span>
           </h1>
         </div>
@@ -73,18 +92,20 @@ const Intro = () => {
           constantly adapt and innovate to stay ahead of the game and meet the
           ever-changing demands of the modern consumer.
         </p>
-        <button className="p-2 lg:p-4 md:w-[150px] lg:w-[200px] bg-black text-center text-white rounded text-[10px] sm:text-xs md:text-md lg:text-xl font-medium mt-2 flex items-center justify-center gap-2 sm:gap-4">
+        <button className="p-2 lg:p-4 md:w-[150px] lg:w-[200px] bg-black text-center text-white rounded text-[10px] sm:text-xs md:text-md lg:text-xl font-medium mt-2 flex items-center justify-center gap-2 sm:gap-4 hover:bg-purple-900">
           Contact Us <FaArrowRightLong className="fill-white" />
         </button>
       </div>
       <div className="w-full h-[180px] sm:h-[250px] md:h-[380px] lg:h-[420px] 2xl:h-[500px] relative border lg:border-[3px] border-black rounded-xl mt-12 md:mt-20 shadow-custom bg-white">
         {/* ----background images (gradients,ring, stars etc.)----- */}
-        <img
+        <motion.img
+          style={{ x: imgMove }}
           src={images?.blueCircleGrad}
           alt=""
           className="z-[-2] absolute left-[45%] top-[-35%] h-[35vh] w-[30vw]"
         />
-        <img
+        <motion.img
+          style={{ x: startMove }}
           src={images?.star}
           alt="net"
           className="z-[-2] absolute right-[20%] bottom-[-12%] size-[3vw]"

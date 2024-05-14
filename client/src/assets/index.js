@@ -25,4 +25,8 @@ export const images = {
   net2: require("./net2.png"),
   net3: require("./net3.png"),
   submit: require("./submitIcon.png"),
+  ai: require("./ai.png"),
+  bi: require("./bi.png"),
+  cloud: require("./cloud.png"),
+  web: require("./web.png"),
 };
