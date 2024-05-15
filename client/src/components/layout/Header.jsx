@@ -22,14 +22,14 @@ const Header = ({ active }) => {
   }, []);
   return (
     <>
-      <div className="h-[40px] sm:h-[50px] md:h-[60px] lg:h-[75px] w-full bg-white rounded-lg p-2 lg:p-3 my-4 sm:my-8 border border-gray-300 shadow-lg">
+      <div className="h-[50px] md:h-[60px] lg:h-[75px] w-full bg-white rounded-lg p-2 lg:p-3 my-4 sm:my-8 border border-gray-300 shadow-lg">
         <div className="h-full w-full flex items-center justify-between gap-2">
           <img
             src={images.logo}
             alt="Logo"
             className="w-[20%] sm:w-[15%] md:w-[15%] md:h-[60%] lg:w-[20%] lg:h-[70%] lg:ml-4 xl:w-[15%]"
           />
-          <div className="hidden sm:flex gap-4 lg:gap-6 items-center justify-center font-semibold text-xs md:text-[15px] lg:text-lg xl:text-xl cursor-pointer">
+          <div className="hidden sm:flex gap-4 lg:gap-6 items-center justify-center font-semibold text-xs md:text-[12px] lg:text-[14px] xl:text-lg cursor-pointer">
             {navbarLinks?.map((link, i) => (
               <Link
                 key={i}

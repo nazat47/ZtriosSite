@@ -12,7 +12,7 @@ const OurServices = () => {
   const startMove = useTransform(scrollYProgress, [0, 1], ["0%", "1000%"]);
   return (
     <>
-      <div className="w-full flex flex-col gap-10 md:gap-16 items-center justify-center mt-16 sm:mt-28 md:mt-32 relative">
+      <div className="w-full flex flex-col gap-10 md:gap-16 items-center justify-center mt-28 md:mt-32 relative">
         {/* ----background images (gradients,ring, stars etc.)----- */}
         <motion.img
           style={{ x: imgMove }}
@@ -53,7 +53,7 @@ const OurServices = () => {
         <img
           src={images?.net}
           alt="net"
-          className="z-[-2] absolute right-[15%] top-[30%] w-[50vw] h-[50vh] opacity-40"
+          className="z-[-2] absolute top-[30%] sm:top-[20%] md:top-[40%] w-[80vw] md:w-[80vw] h-[60vh] sm:h-[90vh] md:h-[60vh] 2xl:h-[70vh] opacity-80"
         />
         <motion.img
           style={{ x: imgMove }}
@@ -77,7 +77,7 @@ const OurServices = () => {
           <img
             src={images?.net}
             alt="net"
-            className="z-[-2] h-[20vh] w-[45vw] md:w-[35vw] top-0 xl:top-[5%] absolute opacity-60"
+            className="z-[-2] h-[25vh] sm:h-[30vh] md:h-[35vh] xl:h-[40vh] w-[100vw] top-[-5%] sm:top-[-10%] absolute brightness-90 lg:brightness-100"
           />
           <p className="text-[#925FFF] font-semibold text-xs sm:text-sm md:text-md lg:text-lg 2xl:text-xl">
             Our Services
@@ -87,7 +87,7 @@ const OurServices = () => {
           </h1>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-4 lg:gap-6">
-          <div className="h-[208px] border-[2px] border-gray-300 rounded-xl p-3 sm:p-4 2xl:p-6 backdrop-blur-lg bg-white/10 shadow-custom backdrop-brightness-95">
+          <div className="h-[208px] border-[2px] border-gray-300 rounded-xl p-3 sm:p-4 2xl:p-6 backdrop-blur-lg bg-white/10 shadow-custom backdrop-brightness-95 transition-transform duration-300 hover:scale-105 cursor-pointer">
             <div className="flex gap-2 sm:gap-4 md:gap-2 lg:gap-4 items-center">
               <img
                 src={images?.web}
@@ -104,7 +104,7 @@ const OurServices = () => {
               need tounderstand the need to
             </p>
           </div>
-          <div className="h-[208px] border-[2px] border-gray-300 rounded-xl p-3 sm:p-4 2xl:p-6 backdrop-blur-lg bg-white/10 shadow-custom backdrop-brightness-95">
+          <div className="h-[208px] border-[2px] border-gray-300 rounded-xl p-3 sm:p-4 2xl:p-6 backdrop-blur-lg bg-white/10 shadow-custom backdrop-brightness-95 transition-transform duration-300 hover:scale-105 cursor-pointer">
             <div className="flex gap-2 sm:gap-4 md:gap-2 lg:gap-4 items-center">
               <MdAppSettingsAlt className="size-[40px] sm:size-[60px] md:size-[40px] lg:size-[60px]" />
               <p className="flex flex-col font-bold text-sm sm:text-lg md:text-md lg:text-lg xl:text-xl">
@@ -117,7 +117,7 @@ const OurServices = () => {
               need tounderstand the need to
             </p>
           </div>
-          <div className="h-[208px] border-[2px] border-gray-300 rounded-xl p-3 sm:p-4 2xl:p-6 backdrop-blur-lg bg-white/10 shadow-custom backdrop-brightness-95">
+          <div className="h-[208px] border-[2px] border-gray-300 rounded-xl p-3 sm:p-4 2xl:p-6 backdrop-blur-lg bg-white/10 shadow-custom backdrop-brightness-95 transition-transform duration-300 hover:scale-105 cursor-pointer">
             <div className="flex gap-2 sm:gap-4 md:gap-2 lg:gap-4 items-center">
               <img
                 src={images?.ai}
@@ -134,7 +134,7 @@ const OurServices = () => {
               need tounderstand the need to
             </p>
           </div>
-          <div className="h-[208px] border-[2px] border-gray-300 rounded-xl p-3 sm:p-4 2xl:p-6 backdrop-blur-lg bg-white/10 shadow-custom backdrop-brightness-95">
+          <div className="h-[208px] border-[2px] border-gray-300 rounded-xl p-3 sm:p-4 2xl:p-6 backdrop-blur-lg bg-white/10 shadow-custom backdrop-brightness-95 transition-transform duration-300 hover:scale-105 cursor-pointer">
             <div className="flex gap-2 sm:gap-4 md:gap-2 lg:gap-4 items-center">
               <img
                 src={images?.cloud}
@@ -151,7 +151,7 @@ const OurServices = () => {
               need tounderstand the need to
             </p>
           </div>
-          <div className="h-[208px] border-[2px] border-gray-300 rounded-xl p-3 sm:p-4 2xl:p-6 backdrop-blur-lg bg-white/10 shadow-custom backdrop-brightness-95">
+          <div className="h-[208px] border-[2px] border-gray-300 rounded-xl p-3 sm:p-4 2xl:p-6 backdrop-blur-lg bg-white/10 shadow-custom backdrop-brightness-95 transition-transform duration-300 hover:scale-105 cursor-pointer">
             <div className="flex gap-2 sm:gap-4 md:gap-2 lg:gap-4 items-center">
               <img
                 src={images?.bi}
@@ -168,7 +168,7 @@ const OurServices = () => {
               need tounderstand the need to
             </p>
           </div>
-          <div className="h-[208px] border-[2px] border-gray-300 rounded-xl p-3 sm:p-4 2xl:p-6 backdrop-blur-lg bg-white/10 shadow-custom backdrop-brightness-95">
+          <div className="h-[208px] border-[2px] border-gray-300 rounded-xl p-3 sm:p-4 2xl:p-6 backdrop-blur-lg bg-white/10 shadow-custom backdrop-brightness-95 transition-transform duration-300 transform hover:scale-[105%] cursor-pointer">
             <div className="flex gap-2 sm:gap-4 md:gap-2 lg:gap-4 items-center">
               <TbShoppingCartCog className="size-[40px] sm:size-[60px] md:size-[40px] lg:size-[60px]" />
               <p className="flex flex-col font-bold text-sm sm:text-lg md:text-md lg:text-lg xl:text-xl">

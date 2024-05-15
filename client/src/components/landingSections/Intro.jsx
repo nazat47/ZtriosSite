@@ -8,10 +8,10 @@ const Intro = () => {
     offset: ["start start", "end end"],
   });
   const imgMove = useTransform(scrollYProgress, [0, 1], ["0%", "200%"]);
-  const startMove = useTransform(scrollYProgress, [0, 1], ["0%", "1000%"]);
+  const startMove = useTransform(scrollYProgress, [0, 1], ["0%", "3000%"]);
   return (
     <>
-      <div className="w-full flex flex-col gap-2 sm:gap-4 md:gap-8 text-center items-center mt-12 md:mt-20 relative">
+      <div className="w-full h-auto lg:h-[60vh] xl:h-auto flex flex-col gap-2 sm:gap-4 md:gap-4 2xl:gap-8 text-center items-center mt-12 md:mt-20 relative">
         {/* ----background images (gradients,ring, stars etc.)----- */}
         <motion.img
           style={{ x: imgMove }}
@@ -49,12 +49,15 @@ const Intro = () => {
           alt=""
           className="z-[-3] absolute left-[-25%] md:left-[-30%] lg:left-[-40%] top-[30%] sm:top-[20%] md:top-[20%] lg:top-[70%] 2xl:top-[90%] h-[40vh] sm:h-[60vh] w-[40vw]"
         />
-        <div className="z-[-2] absolute left-[-15%] md:left-[-20%] xl:left-[-25%] top-[60%] xl:top-[40%] size-[25vw] rotate-90">
+        <div
+          style={{ x: imgMove }}
+          className="z-[-2] absolute left-[-15%] md:left-[-20%] xl:left-[-25%] top-[60%] xl:top-[40%] size-[25vw] rotate-90"
+        >
           <motion.img
-            style={{ x: imgMove }}
             src={images?.ring}
             alt=""
             className="size-[25vw]"
+            style={{ x: imgMove }}
           />
         </div>
         <img
@@ -69,13 +72,13 @@ const Intro = () => {
           className="z-[-2] absolute right-0 top-[100%] sm:top-[90%] size-[3vw] transfrom -rotate-90"
         />
         {/* --------- */}
-        <div className="flex justify-center w-full sm:w-[90%] md:w-[80%] relative">
+        <div className="flex justify-center w-full md:w-[90%] lg:w-[80%] relative">
           <img
             src={images?.net}
             alt="net"
-            className="z-[-2] h-[15vh] sm:h-[20vh] md:h-[30vh] top-[10%] absolute opacity-50"
+            className="z-[-2] h-[15vh] sm:h-[20vh] md:h-[30vh] xl:h-[40vh] w-[70vw] top-0 md:top-[-10%] xl:top-0 absolute brightness-75 lg:brightness-100" 
           />
-          <h1 className="text-[25px] sm:text-[30px] md:text-[35px] lg:text-[50px] xl:text-[65px] font-bold leading-[120%]">
+          <h1 className="text-[25px] sm:text-[30px] md:text-[7vh] xl:text-[55px] 2xl:text-[65px] font-bold leading-[120%]">
             Is Your Business Equipped to Conquer the Challenges of{" "}
             <span className="relative">
               Tomorrow?
@@ -83,12 +86,12 @@ const Intro = () => {
                 initial={{ width: "0" }}
                 animate={{ width: "100%" }}
                 transition={{ duration: 0.8, ease: "easeInOut", delay: 0.3 }}
-                className="absolute h-[10px] sm:h-[20px] lg:h-[40px] w-full bg-[#00FFAE] bottom-2 xl:bottom-4 left-0 z-[-1]"
+                className="absolute h-[10px] sm:h-[20px] md:h-[40px] w-full bg-[#00FFAE] bottom-2 xl:bottom-4 left-0 z-[-1]"
               ></motion.div>
             </span>
           </h1>
         </div>
-        <p className="text-[7px] sm:text-[10px] md:text-xs lg:text-md xl:text-xl w-[80%] sm:w-[65%] text-gray-600">
+        <p className="text-[7px] sm:text-[10px] md:text-[2vh] 2xl:text-lg w-[80%] sm:w-[65%] text-gray-600">
           In today's rapidly evolving business landscape, standing still is the
           quickest path to obsolescence. At Ztrios, we understand the need to
           constantly adapt and innovate to stay ahead of the game and meet the

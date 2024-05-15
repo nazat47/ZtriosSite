@@ -6,6 +6,7 @@ import Blueprint from "../components/landingSections/Blueprint";
 import { Reviews } from "../components/landingSections/Reviews";
 import Intro from "../components/landingSections/Intro";
 import Collaborate from "../components/landingSections/Collaborate";
+import Blogs from "../components/landingSections/Blogs";
 
 export default function Landing() {
   const scrollRef = useRef();
@@ -20,6 +21,7 @@ export default function Landing() {
       <Blueprint />
       <Reviews />
       <Collaborate />
+      <Blogs />
       <Footer />
     </div>
   );

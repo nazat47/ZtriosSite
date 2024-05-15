@@ -9,7 +9,7 @@ const Blueprint = () => {
   const imgMove = useTransform(scrollYProgress, [0, 1], ["-200%", "200%"]);
   return (
     <>
-      <div className="w-full flex flex-col gap-16 items-center justify-center mt-[70px] sm:mt-[100px] md:mt-[150px] 2xl:mt-[200px] relative">
+      <div className="w-full flex flex-col gap-16 items-center justify-center mt-[100px] md:mt-[150px] 2xl:mt-[200px] relative">
         {/* ----background images (gradients,ring, stars etc.)----- */}
         <motion.img
           style={{ x: imgMove }}
@@ -34,7 +34,7 @@ const Blueprint = () => {
           <img
             src={images?.net}
             alt="net"
-            className="z-[-2] h-[30vh] w-[46vw] top-[0] sm:top-[5%] absolute opacity-50"
+            className="z-[-2] h-[30vh] md:h-[50vh] w-[100vw] md:w-[70vw] top-0 absolute brightness-50 sm:brightness-0 lg:brightness-100"
           />
           <p className="text-[#925fffa2] font-semibold text-xs sm:text-sm md:text-md xl:text-xl">
             Our Working Procedure
@@ -57,7 +57,7 @@ const Blueprint = () => {
               alt="circle"
               className="z-[-2] top-[40%] md:top-[50%] left-[30%] md:left-[10%] absolute opacity-40 size-[30vh] md:size-[350px]"
             />
-            <div className="h-[350px] sm:h-[400px] rounded-lg p-4 bg-black text-white shadow-xl">
+            <div className="h-[350px] sm:h-[400px] rounded-lg p-4 bg-black text-white shadow-xl transition-transform duration-300 hover:scale-105">
               <p className="flex flex-col text-lg md:text-xl items-start leading-[140%] md:leading-[100%] lg:leading-[140%]">
                 Discover{" "}
                 <span className="font-bold text-3xl md:text-[30px]">
@@ -73,7 +73,7 @@ const Blueprint = () => {
                 Understanding your goals, uncovering opportunities
               </p>
             </div>
-            <div className="h-[350px] sm:h-[400px] rounded-lg bg-black text-white relative shadow-xl">
+            <div className="h-[350px] sm:h-[400px] rounded-lg bg-black text-white relative shadow-xl transition-transform duration-300 hover:scale-105">
               <img
                 src={images?.designBrilliance}
                 alt="design"
@@ -86,7 +86,7 @@ const Blueprint = () => {
                 Crafting tailored solutions that shine
               </p>
             </div>
-            <div className="h-[350px] sm:h-[400px] rounded-lg p-4 bg-black text-white shadow-xl">
+            <div className="h-[350px] sm:h-[400px] rounded-lg p-4 bg-black text-white shadow-xl transition-transform duration-300 hover:scale-105">
               <p className="text2_gradient flex flex-col text-2xl sm:text-3xl md:text-[2.5vw] items-start font-bold leading-[30px] md:leading-[25px] lg:leading-[40px] mt-4">
                 Refine to Perfection
               </p>
@@ -99,7 +99,7 @@ const Blueprint = () => {
                 className="h-[60%] w-full my-2"
               />
             </div>
-            <div className="h-[350px] sm:h-[400px] rounded-lg p-4 bg-white shadow-xl">
+            <div className="h-[350px] sm:h-[400px] rounded-lg p-4 bg-white shadow-xl transition-transform duration-300 hover:scale-105">
               <p className="flex flex-col text-[2.5vw] items-start font-bold leading-[30px] mt-4">
                 Unlock Growth
               </p>
