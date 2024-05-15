@@ -29,7 +29,7 @@ const Header = ({ active }) => {
             alt="Logo"
             className="w-[20%] sm:w-[15%] md:w-[15%] md:h-[60%] lg:w-[20%] lg:h-[70%] lg:ml-4 xl:w-[15%]"
           />
-          <div className="hidden sm:flex gap-4 lg:gap-6 items-center justify-center font-semibold text-xs md:text-md xl:text-xl cursor-pointer">
+          <div className="hidden sm:flex gap-4 lg:gap-6 items-center justify-center font-semibold text-xs md:text-[15px] lg:text-lg xl:text-xl cursor-pointer">
             {navbarLinks?.map((link, i) => (
               <Link
                 key={i}
@@ -52,13 +52,15 @@ const Header = ({ active }) => {
       </div>
       {/*--- Mobile nav ---*/}
       <div
-        className={`fixed top-0 left-0 right-0 bottom-0 bg-[#00000042] z-[5] transition-transform duration-500 transform  ${
+        className={`fixed top-0 left-0 right-0 bottom-0 bg-[#00000042] z-[5] transition-transform duration-300 transform  ${
           open ? "translate-x-0" : "translate-x-full"
         }`}
       >
         <div
           ref={ref}
-          className={`absolute top-0 right-0 h-full w-[60vw] bg-white z-[9] p-4`}
+          className={`absolute top-0 right-0 h-full w-[60vw] bg-white z-[9] p-4 transition-transform duration-700 transform  ${
+            open ? "translate-x-0" : "translate-x-full"
+          }`}
         >
           <div className="relative h-full w-full p-4">
             <MdClose

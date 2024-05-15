@@ -29,19 +29,19 @@ const Intro = () => {
           style={{ x: imgMove }}
           src={images?.ring}
           alt=""
-          className="z-[-2] absolute right-[-20%] md:right-[-28%] top-[-30%] size-[25vw]"
+          className="z-[-2] absolute right-[-20%] md:right-[-20%] xl:right-[-25%] top-[-30%] size-[25vw]"
         />
         <motion.img
           style={{ x: startMove }}
           src={images?.star}
           alt=""
-          className="z-[-2] absolute left-0 md:left-[-6%] top-[-20%] sm:top-0 size-[3vw]"
+          className="z-[-2] absolute left-0 md:left-0 top-[-20%] sm:top-0 size-[3vw]"
         />
         <motion.img
           style={{ x: imgMove }}
           src={images?.purpleCircleGrad}
           alt=""
-          className="z-[-2] absolute left-[-80%] sm:left-[-50%] md:left-[-50%] top-[40%] sm:top-[40%] md:top-[30%] lg:top-[20%] xl:top-[20%] h-[30vh] lg:h-[50vh] xl:h-[80vh] w-[70vw] lg:w-[60vw] transform rotate-120"
+          className="z-[-2] absolute left-[-50%] md:left-[-50%] top-[10%] sm:top-[40%] md:top-[30%] lg:top-[20%] xl:top-[20%] h-[30vh] lg:h-[50vh] xl:h-[80vh] w-[70vw] lg:w-[60vw] transform rotate-120"
         />
         <motion.img
           style={{ x: imgMove }}
@@ -49,22 +49,24 @@ const Intro = () => {
           alt=""
           className="z-[-3] absolute left-[-25%] md:left-[-30%] lg:left-[-40%] top-[30%] sm:top-[20%] md:top-[20%] lg:top-[70%] 2xl:top-[90%] h-[40vh] sm:h-[60vh] w-[40vw]"
         />
-        <motion.img
-          style={{ x: imgMove }}
-          src={images?.ring}
-          alt=""
-          className="z-[-2] absolute left-[-15%] md:left-[-30%] top-[60%] xl:top-[40%] size-[25vw] transfrom -rotate-90"
-        />
+        <div className="z-[-2] absolute left-[-15%] md:left-[-20%] xl:left-[-25%] top-[60%] xl:top-[40%] size-[25vw] rotate-90">
+          <motion.img
+            style={{ x: imgMove }}
+            src={images?.ring}
+            alt=""
+            className="size-[25vw]"
+          />
+        </div>
         <img
           src={images?.net2}
           alt="net"
-          className="z-[-2] absolute right-[-10%] md:right-[-20%] xl:right-[-25%] top-[90%] sm:top-[70%] size-[20vw] transfrom -rotate-90 opacity-70"
+          className="z-[-2] absolute right-[-10%] md:right-[-20%] xl:right-[-25%] top-[90%] sm:top-[70%] size-[20vw] transform -rotate-90 opacity-70"
         />
         <motion.img
           style={{ x: startMove }}
           src={images?.star}
           alt="net"
-          className="z-[-2] absolute right-0 md:right-[-5%] top-[100%] sm:top-[90%] size-[3vw] transfrom -rotate-90"
+          className="z-[-2] absolute right-0 top-[100%] sm:top-[90%] size-[3vw] transfrom -rotate-90"
         />
         {/* --------- */}
         <div className="flex justify-center w-full sm:w-[90%] md:w-[80%] relative">
@@ -73,7 +75,7 @@ const Intro = () => {
             alt="net"
             className="z-[-2] h-[15vh] sm:h-[20vh] md:h-[30vh] top-[10%] absolute opacity-50"
           />
-          <h1 className="text-[20px] sm:text-[30px] md:text-[35px] lg:text-[50px] xl:text-[65px] font-bold leading-[120%]">
+          <h1 className="text-[25px] sm:text-[30px] md:text-[35px] lg:text-[50px] xl:text-[65px] font-bold leading-[120%]">
             Is Your Business Equipped to Conquer the Challenges of{" "}
             <span className="relative">
               Tomorrow?
@@ -96,7 +98,7 @@ const Intro = () => {
           Contact Us <FaArrowRightLong className="fill-white" />
         </button>
       </div>
-      <div className="w-full h-[180px] sm:h-[250px] md:h-[380px] lg:h-[420px] 2xl:h-[500px] relative border lg:border-[3px] border-black rounded-xl mt-12 md:mt-20 shadow-custom bg-white">
+      <div className="w-full h-[240px] sm:h-[250px] md:h-[380px] lg:h-[420px] 2xl:h-[500px] relative border lg:border-[3px] border-black rounded-xl mt-12 md:mt-20 shadow-custom bg-white">
         {/* ----background images (gradients,ring, stars etc.)----- */}
         <motion.img
           style={{ x: imgMove }}
@@ -111,22 +113,22 @@ const Intro = () => {
           className="z-[-2] absolute right-[20%] bottom-[-12%] size-[3vw]"
         />
         {/* --------- */}
-        <h1 className="absolute top-[25px] md:top-[50px] left-[10%] text-[3.4vw] sm:text-[3vw] font-bold">
+        <h1 className="absolute top-[25px] md:top-[50px] left-[5%] sm:left-[10%] text-[17px] sm:text-[3vw] font-bold">
           Ztrios : Where Innovation Meets Excellence
         </h1>
         <div className="flex gap-2 md:gap-4 xl:gap-8 py-4 md:py-8 xl:py-12 items-end h-full">
           <img src={images.bulb} alt="Bulb" className="w-[30%] h-[70%]" />
           <div className="bg-[#7850F2] bg-opacity-50 rounded-l-md h-full w-[70%]">
             <div className="flex flex-col gap-1 sm:gap-2 xl:gap-3 mt-8 sm:mt-10 md:mt-16 xl:mt-12 2xl:mt-16 w-full p-2 md:p-4 xl:p-6">
-              <p className="text-[1.6vw] xl:text-[1.3vw] font-medium">
+              <p className="text-[1.9vw] sm:text-[1.6vw] xl:text-[1.3vw] font-medium">
                 At Ztrios, we're your partner for success. Our experts deliver
                 innovative solutions that inspire growth, drive innovation, and
                 automate for efficiency.
               </p>
-              <p className="font-semibold text-[2.5vw] sm:text-[2vw] md:text-[2.5vw] lg:text-[2vw] text-[#00FFAE] font-cevat">
+              <p className="font-semibold text-[2.9vw] sm:text-[2vw] md:text-[2.5vw] lg:text-[2vw] text-[#00FFAE] font-cevat">
                 Elevating your business is our passion
               </p>
-              <p className="text-[1.4vw] sm:text-[1.6vw] xl:text-[1.3vw] font-medium">
+              <p className="text-[1.9vw] sm:text-[1.6vw] xl:text-[1.3vw] font-medium">
                 We stay ahead of the curve, leveraging cutting-edge tech and
                 industry best practices. Our tailored approach ensures solutions
                 crafted for your unique goals, delivering tangible results that

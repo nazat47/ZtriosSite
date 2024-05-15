@@ -18,37 +18,37 @@ const OurServices = () => {
           style={{ x: imgMove }}
           src={images?.purpleCircleGrad}
           alt=""
-          className="z-[-2] absolute left-[-45%] sm:left-[-20%] md:left-[-25%] top-0 size-[35vh] lg:size-[30vw] transform rotate-[270deg]"
+          className="z-[-2] absolute left-[-35%] sm:left-[-20%] md:left-[-25%] top-0 size-[35vh] lg:size-[50vh] transform rotate-[270deg]"
         />
         <motion.img
           style={{ x: imgMove }}
           src={images?.purpleCircleGrad}
           alt=""
-          className="z-[-2] absolute right-[-35%] sm:right-[-18%] top-[80%] sm:top-[85%] lg:top-[70%] size-[30vh] lg:size-[25vw]"
+          className="z-[-2] absolute right-[-35%] sm:right-[-18%] top-[80%] sm:top-[85%] lg:top-[70%] size-[30vh] lg:size-[35vh]"
         />
         <motion.img
           style={{ x: imgMove }}
           src={images?.blueCircleGrad}
           alt=""
-          className="z-[-2] absolute right-[-50px] sm:right-[0px] top-[5%] lg:top-[20%] size-[25vh] lg:size-[20vw]"
+          className="z-[-2] absolute right-[-50px] sm:right-[0px] top-[5%] md:top-[20%]  size-[25vh] lg:size-[40vh]"
         />
         <motion.img
           style={{ x: imgMove }}
           src={images?.purpleCircleGrad}
           alt=""
-          className="z-[-2] absolute right-[-50px] sm:right-[0px] top-[5%] lg:top-[20%] size-[25vh] lg:size-[20vw] opacity-40"
+          className="z-[-2] absolute right-[-50px] sm:right-[0px] top-[5%] md:top-[20%] size-[25vh] lg:size-[40vh] opacity-40"
         />
         <motion.img
           style={{ x: imgMove }}
           src={images?.blueCircleGrad}
           alt=""
-          className="z-[-2] absolute right-[20%] sm:right-[30%] lg:right-[50%] top-[50%] size-[35vh] lg:size-[25vw]"
+          className="z-[-2] absolute right-[20%] sm:right-[30%] lg:right-[50%] top-[50%] size-[25vh] sm:size-[35vh] lg:size-[45vh]"
         />
         <motion.img
           style={{ x: imgMove }}
           src={images?.purpleCircleGrad}
           alt=""
-          className="z-[-2] absolute right-[20%] sm:right-[30%] lg:right-[50%] top-[50%] size-[35vh] lg:size-[25vw] opacity-50"
+          className="z-[-2] absolute right-[20%] sm:right-[30%] lg:right-[50%] top-[50%] size-[25vh] sm:size-[35vh] lg:size-[45vh] opacity-50"
         />
         <img
           src={images?.net}
@@ -59,7 +59,7 @@ const OurServices = () => {
           style={{ x: imgMove }}
           src={images?.ring}
           alt=""
-          className="z-[-2] absolute right-[-60%] sm:right-[-40%] md:right-[-25%] top-[25%] size-[30vh] lg:size-[25vw] transform rotate-[90deg]"
+          className="z-[-2] absolute right-[-60%] sm:right-[-40%] md:right-[-25%] top-[25%] size-[30vh] lg:size-[45vh] transform rotate-[90deg]"
         />
         <motion.img
           style={{ x: startMove }}

@@ -12,7 +12,7 @@ export default function Landing() {
   return (
     <div
       ref={scrollRef}
-      className="w-[90vw] md:w-[80vw] lg:w-[75vw] min-h-screen mx-auto"
+      className="w-[100vw] min-h-screen mx-auto overflow-x-hidden px-[20px] sm:px-[40px] md:px-[60px] lg:px-[80px] xl:px-[120px] 2xl:px-[170px]"
     >
       <Header active={0} />
       <Intro />

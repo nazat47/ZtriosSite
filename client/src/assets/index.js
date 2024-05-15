@@ -29,4 +29,10 @@ export const images = {
   bi: require("./bi.png"),
   cloud: require("./cloud.png"),
   web: require("./web.png"),
+  nike:require("./nike.png"),
+  whirlpool:require("./whirlpool.png"),
+  handy:require("./handy.png"),
+  rak:require("./rak.png"),
+  pfizer:require("./pfizer.png"),
+  unknownClient:require("./unknownClient.png"),
 };

@@ -15,7 +15,7 @@ const Blueprint = () => {
           style={{ x: imgMove }}
           src={images?.blueCircleMedium}
           alt="circle"
-          className="z-[-2] absolute size-[20vh] sm:size-[22vw] top-[-5%] md:top-0 left-[-10%] md:left-[-25%] opacity-50"
+          className="z-[-2] absolute size-[20vh] sm:size-[22vw] top-[-5%] md:top-0 left-[-10%] md:left-[-15%] opacity-50"
         />
         <motion.img
           style={{ x: imgMove }}
@@ -27,10 +27,10 @@ const Blueprint = () => {
           style={{ x: imgMove }}
           src={images?.accentMedium}
           alt="circle"
-          className="z-[-2] size-[25vh] md:size-[20vw] top-[80%] md:top-[100%] right-[-25%] absolute opacity-60"
+          className="z-[-2] size-[25vh] md:size-[20vw] top-[80%] md:top-[90%] right-[-25%] md:right-[-20%] absolute opacity-60"
         />
         {/* --------- */}
-        <div className="flex flex-col items-center justify-center text-center w-full xl:w-[85%]">
+        <div className="flex flex-col items-center justify-center text-center w-full">
           <img
             src={images?.net}
             alt="net"
@@ -50,7 +50,7 @@ const Blueprint = () => {
               className="top-[85%] right-[-8%] absolute w-[80px] h-[15px] sm:h-[20px] sm:w-[15vw] sm:mt-2 xl:mt-4"
             />
           </p>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 2xl:gap-6 mt-8 sm:mt-10 xl:mt-14 relative">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 xl:gap-8 mt-8 sm:mt-10 xl:mt-14 relative">
             <motion.img
               style={{ x: imgMove }}
               src={images?.purpleCircleMedium}
@@ -87,7 +87,7 @@ const Blueprint = () => {
               </p>
             </div>
             <div className="h-[350px] sm:h-[400px] rounded-lg p-4 bg-black text-white shadow-xl">
-              <p className="text2_gradient flex flex-col text-2xl sm:text-3xl md:text-[2.5vw] items-start font-bold leading-[30px] md:leading-[25px] lg:leading-[30px] mt-4">
+              <p className="text2_gradient flex flex-col text-2xl sm:text-3xl md:text-[2.5vw] items-start font-bold leading-[30px] md:leading-[25px] lg:leading-[40px] mt-4">
                 Refine to Perfection
               </p>
               <p className="text-gray-300 text-[10px] sm:text-xs my-2">
@@ -122,7 +122,39 @@ const Blueprint = () => {
             Brands That Believe in Ztrios
           </h1>
         </div>
-        <img src={images?.clients} alt="clients" />
+        {/* <img src={images?.clients} alt="clients" /> */}
+        <div className="w-full flex px-4 items-center justify-between">
+          <img
+            src={images?.nike}
+            alt="nike"
+            className="size-[10vw] lg:size-[8vw]"
+          />
+          <img
+            src={images?.handy}
+            alt="handy"
+            className="size-[10vw] lg:size-[8vw]"
+          />
+          <img
+            src={images?.whirlpool}
+            alt="whirlpool"
+            className="size-[10vw] lg:size-[8vw]"
+          />
+          <img
+            src={images?.rak}
+            alt="rak"
+            className="size-[10vw] lg:size-[8vw]"
+          />
+          <img
+            src={images?.pfizer}
+            alt="pfizer"
+            className="size-[10vw] lg:size-[8vw]"
+          />
+          <img
+            src={images?.unknownClient}
+            alt="unknownClient"
+            className="size-[8vw]"
+          />
+        </div>
       </div>
     </>
   );
