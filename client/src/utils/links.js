@@ -17,6 +17,6 @@ export const navbarLinks=[
     },
     {
         name:"Blogs",
-        url:'/Blogs',
+        url:'/blogs',
     },
 ]

@@ -1,13 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { CgMenuRight } from "react-icons/cg";
 import { images } from "../../assets";
 import { navbarLinks } from "../../utils/links";
 import { MdClose } from "react-icons/md";
 
-const Header = ({ active }) => {
+const Header = () => {
   const [open, setOpen] = useState(false);
   const ref = useRef();
+  const { pathname } = useLocation();
 
   useEffect(() => {
     const handleClick = (e) => {
@@ -34,7 +35,11 @@ const Header = ({ active }) => {
               <Link
                 key={i}
                 to={link.url}
-                className={`${active === i ? "text-[#7850F2]" : "text-black"}`}
+                className={`${
+                  pathname.toLowerCase() === link.url
+                    ? "text-[#7850F2]"
+                    : "text-black"
+                }`}
               >
                 {link.name}
               </Link>
@@ -75,7 +80,7 @@ const Header = ({ active }) => {
                   key={i}
                   to={link.url}
                   className={`${
-                    active === i ? "text-[#7850F2]" : "text-black"
+                    pathname === link?.name ? "text-[#7850F2]" : "text-black"
                   }`}
                 >
                   {link.name}

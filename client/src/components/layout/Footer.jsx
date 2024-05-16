@@ -7,7 +7,7 @@ import { images } from "../../assets";
 
 const Footer = () => {
   return (
-    <div className="w-full lg:w-[95%] xl:w-[80%] flex items-start justify-between mx-auto mt-[120px] p-6 ">
+    <div className="w-full lg:w-[95%] xl:w-[80%] flex items-start justify-between mx-auto mt-[200px] p-6 ">
       <div className="flex flex-col gap-4">
         <img src={images?.logo} alt="logo" className="w-[10vw]" />
         <div className="flex gap-3 text-sm xl:text-md">
