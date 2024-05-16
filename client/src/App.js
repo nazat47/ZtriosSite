@@ -3,7 +3,9 @@ import Landing from "./pages/Landing";
 import About from "./pages/About";
 import Services from "./pages/Services";
 import CaseStudy from "./pages/CaseStudy";
-import Blog from "./pages/Blog";
+import Blogs from "./pages/Blogs";
+import Blog from "./components/Blog";
+
 
 function App() {
   return (
@@ -13,7 +15,8 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/service" element={<Services />} />
         <Route path="/casestudy" element={<CaseStudy />} />
-        <Route path="/blogs" element={<Blog />} />
+        <Route path="/blogs" element={<Blogs />} />
+        <Route path="/blog/:id" element={<Blog />} />
         <Route path="*" element={<p>Route not found</p>} />
       </Routes>
     </BrowserRouter>
