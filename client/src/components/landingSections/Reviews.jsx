@@ -21,25 +21,25 @@ export const Reviews = () => {
           style={{ x: imgMove }}
           src={images?.accentMedium}
           alt="circle"
-          className="z-[-2] size-[20vh] md:size-[17vw] top-[15%] sm:top-[10%] md:top-[20%] left-[30%] sm:left-[20%] md:left-[26%] absolute opacity-50"
+          className="z-[-2] size-[35vw] md:size-[17vw] top-[15%] sm:top-[20%] md:top-[20%] left-[30%] sm:left-[20%] md:left-[26%] absolute opacity-50"
         />
         <motion.img
           style={{ x: imgMove }}
           src={images?.purpleCircleMedium}
           alt="circle"
-          className="z-[-2] size-[20vh] md:size-[17vw] top-[60%] right-[0] sm:right-[25%] absolute opacity-50"
+          className="z-[-2] size-[45vw] md:size-[17vw] top-[60%] right-[0] sm:right-[1%] md:right-[15%] absolute opacity-50"
         />
         <motion.img
           style={{ x: imgMove }}
           src={images?.blueCircleMedium}
           alt="circle"
-          className="z-[-2] size-[22vh] md:size-[20vw] top-[10%] right-[-50%] sm:right-[-20%] absolute opacity-70"
+          className="z-[-2] size-[40vw] md:size-[20vw] top-[10%] right-[-50%] sm:right-[-40%] md:right-[-20%] absolute opacity-70"
         />
         <motion.img
           style={{ x: imgMove }}
           src={images?.blueCircleMedium}
           alt="circle"
-          className="z-[-2] size-[20vh] md:size-[20vw] top-[60%] left-[-10%] md:left-[-22%] absolute opacity-90"
+          className="z-[-2] size-[20vh] md:size-[20vw] top-[60%] left-[-5%] md:left-[-10%] absolute opacity-90"
         />
         {/* --------- */}
         <div className="flex flex-col items-center justify-center text-center w-full sm:w-[85%]">
@@ -58,7 +58,7 @@ export const Reviews = () => {
             Witness the Ztrios Impact
           </h1>
         </div>
-        <div className="hidden sm:block w-[80%] h-[auto]">
+        <div className="hidden sm:block w-full lg:w-[80%] h-[auto]">
           <Swiper
             slidesPerView={3}
             pagination={{
@@ -68,7 +68,7 @@ export const Reviews = () => {
             className="my-swiper"
           >
             {[...Array(10)].map((_, i) => (
-              <SwiperSlide className="p-2 cursor-grab my-12" key={i}>
+              <SwiperSlide className="p-2 cursor-grab mt-6 md:mt-10 mb-12" key={i}>
                 <div className="w-full mx-auto flex flex-col gap-2 items-center justify-center rounded-xl sm:p-3 lg:p-6 backdrop-blur-2xl bg-white/10 shadow-custom backdrop-brightness-95">
                   <p className="text-center text-[10px] md:text-xs lg:text-sm xl:text-[15px]">
                     “I've been using this web hosting service for over a year

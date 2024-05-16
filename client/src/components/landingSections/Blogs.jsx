@@ -39,7 +39,7 @@ const Blogs = () => {
         <img
           src={images?.net}
           alt="net"
-          className="z-[-2] absolute h-[12vh] sm:h-[18vh] lg:h-[25vh] w-[80vw] sm:w-[70vw] top-[-5%] sm:top-[-5%] brightness-0 lg:brightness-75 xl:brightness-100 opacity-80"
+          className="z-[-2] absolute h-[12vh] sm:h-[18vh] md:h-[12vh] lg:h-[25vh] w-[80vw] sm:w-[70vw] top-[-5%] sm:top-[-5%] brightness-0 lg:brightness-75 xl:brightness-100 opacity-80"
         />
         <p className="text-[#925fffc5] font-semibold text-xs sm:text-md lg:text-xl">
           Our blogs

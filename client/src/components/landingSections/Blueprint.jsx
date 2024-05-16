@@ -15,7 +15,7 @@ const Blueprint = () => {
           style={{ x: imgMove }}
           src={images?.blueCircleMedium}
           alt="circle"
-          className="z-[-2] absolute size-[20vh] sm:size-[22vw] top-[-5%] md:top-0 left-[-10%] md:left-[-15%] opacity-50"
+          className="z-[-2] absolute size-[20vh] sm:size-[22vw] top-[-5%] md:top-0 left-[-10%] sm:left-[0%] md:left-[-15%] opacity-50"
         />
         <motion.img
           style={{ x: imgMove }}
@@ -34,7 +34,7 @@ const Blueprint = () => {
           <img
             src={images?.net}
             alt="net"
-            className="z-[-2] h-[30vh] md:h-[50vh] w-[100vw] md:w-[70vw] top-0 absolute brightness-50 sm:brightness-0 lg:brightness-100"
+            className="z-[-2] h-[30vh] md:h-[50vh] w-[100vw] md:w-[70vw] top-0 absolute brightness-50 lg:brightness-100"
           />
           <p className="text-[#925fffa2] font-semibold text-xs sm:text-sm md:text-md xl:text-xl">
             Our Working Procedure
@@ -55,7 +55,7 @@ const Blueprint = () => {
               style={{ x: imgMove }}
               src={images?.purpleCircleMedium}
               alt="circle"
-              className="z-[-2] top-[40%] md:top-[50%] left-[30%] md:left-[10%] absolute opacity-40 size-[30vh] md:size-[350px]"
+              className="z-[-2] top-[40%] md:top-[50%] left-[30%] md:left-[10%] absolute opacity-40 size-[40vw] md:size-[350px]"
             />
             <div className="h-[350px] sm:h-[400px] rounded-lg p-4 bg-black text-white shadow-xl transition-transform duration-300 hover:scale-105">
               <p className="flex flex-col text-lg md:text-xl items-start leading-[140%] md:leading-[100%] lg:leading-[140%]">

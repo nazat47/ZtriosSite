@@ -11,7 +11,7 @@ const Intro = () => {
   const startMove = useTransform(scrollYProgress, [0, 1], ["0%", "3000%"]);
   return (
     <>
-      <div className="w-full h-auto lg:h-[60vh] xl:h-auto flex flex-col gap-2 sm:gap-4 md:gap-4 2xl:gap-8 text-center items-center mt-12 md:mt-20 relative">
+      <div className="w-full h-auto lg:h-[60vh] xl:h-auto flex flex-col gap-2 sm:gap-4 md:gap-4 2xl:gap-8 text-center items-center mt-12 md:mt-20 lg:mt-16 relative">
         {/* ----background images (gradients,ring, stars etc.)----- */}
         <motion.img
           style={{ x: imgMove }}
@@ -72,13 +72,13 @@ const Intro = () => {
           className="z-[-2] absolute right-0 top-[100%] sm:top-[90%] size-[3vw] transfrom -rotate-90"
         />
         {/* --------- */}
-        <div className="flex justify-center w-full md:w-[90%] lg:w-[80%] relative">
+        <div className="flex justify-center w-full md:w-[90%] lg:w-[70%] xl:w-[70%] relative">
           <img
             src={images?.net}
             alt="net"
             className="z-[-2] h-[15vh] sm:h-[20vh] md:h-[30vh] xl:h-[40vh] w-[70vw] top-0 md:top-[-10%] xl:top-0 absolute brightness-75 lg:brightness-100" 
           />
-          <h1 className="text-[25px] sm:text-[30px] md:text-[7vh] xl:text-[55px] 2xl:text-[65px] font-bold leading-[120%]">
+          <h1 className="text-[25px] sm:text-[30px] md:text-[4.5vh] lg:text-[50px] xl:text-[55px] 2xl:text-[65px] font-bold leading-[120%]">
             Is Your Business Equipped to Conquer the Challenges of{" "}
             <span className="relative">
               Tomorrow?
@@ -91,7 +91,7 @@ const Intro = () => {
             </span>
           </h1>
         </div>
-        <p className="text-[7px] sm:text-[10px] md:text-[2vh] 2xl:text-lg w-[80%] sm:w-[65%] text-gray-600">
+        <p className="text-[7px] sm:text-[10px] md:text-[1.3vh] lg:text-[15px]  2xl:text-lg w-[80%] sm:w-[65%] text-gray-600">
           In today's rapidly evolving business landscape, standing still is the
           quickest path to obsolescence. At Ztrios, we understand the need to
           constantly adapt and innovate to stay ahead of the game and meet the

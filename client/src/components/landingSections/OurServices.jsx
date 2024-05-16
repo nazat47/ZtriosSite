@@ -18,48 +18,48 @@ const OurServices = () => {
           style={{ x: imgMove }}
           src={images?.purpleCircleGrad}
           alt=""
-          className="z-[-2] absolute left-[-35%] sm:left-[-20%] md:left-[-25%] top-0 size-[35vh] lg:size-[50vh] transform rotate-[270deg]"
+          className="z-[-2] absolute left-[-25%] sm:left-[-10%] md:left-[-25%] top-0 size-[55vw] md:size-[25vh] lg:size-[30vw] transform rotate-[270deg]"
         />
         <motion.img
           style={{ x: imgMove }}
           src={images?.purpleCircleGrad}
           alt=""
-          className="z-[-2] absolute right-[-35%] sm:right-[-18%] top-[80%] sm:top-[85%] lg:top-[70%] size-[30vh] lg:size-[35vh]"
+          className="z-[-2] absolute right-[-35%] sm:right-[-18%] top-[80%] sm:top-[85%] lg:top-[70%] size-[50vw] md:size-[25vh] lg:size-[25vw]"
         />
         <motion.img
           style={{ x: imgMove }}
           src={images?.blueCircleGrad}
           alt=""
-          className="z-[-2] absolute right-[-50px] sm:right-[0px] top-[5%] md:top-[20%]  size-[25vh] lg:size-[40vh]"
+          className="z-[-2] absolute right-[-50px] sm:right-[0px] top-[5%] md:top-[20%]  size-[25vh] lg:size-[30vw]"
         />
         <motion.img
           style={{ x: imgMove }}
           src={images?.purpleCircleGrad}
           alt=""
-          className="z-[-2] absolute right-[-50px] sm:right-[0px] top-[5%] md:top-[20%] size-[25vh] lg:size-[40vh] opacity-40"
+          className="z-[-2] absolute right-[-50px] sm:right-[0px] top-[5%] md:top-[20%] size-[25vh] lg:size-[30vw] opacity-40"
         />
         <motion.img
           style={{ x: imgMove }}
           src={images?.blueCircleGrad}
           alt=""
-          className="z-[-2] absolute right-[20%] sm:right-[30%] lg:right-[50%] top-[50%] size-[25vh] sm:size-[35vh] lg:size-[45vh]"
+          className="z-[-2] absolute right-[20%] sm:right-[30%] lg:right-[50%] top-[50%] size-[25vh] sm:size-[35vh] md:size-[20vh] lg:size-[25vw]"
         />
         <motion.img
           style={{ x: imgMove }}
           src={images?.purpleCircleGrad}
           alt=""
-          className="z-[-2] absolute right-[20%] sm:right-[30%] lg:right-[50%] top-[50%] size-[25vh] sm:size-[35vh] lg:size-[45vh] opacity-50"
+          className="z-[-2] absolute right-[20%] sm:right-[30%] lg:right-[50%] top-[50%] size-[25vh] sm:size-[35vh] md:size-[20vh] lg:size-[25vw] opacity-50"
         />
         <img
           src={images?.net}
           alt="net"
-          className="z-[-2] absolute top-[30%] sm:top-[20%] md:top-[40%] w-[80vw] md:w-[80vw] h-[60vh] sm:h-[90vh] md:h-[60vh] 2xl:h-[70vh] opacity-80"
+          className="z-[-2] absolute top-[30%] sm:top-[20%] md:top-[40%] w-[80vw] md:w-[80vw] h-[60vh] sm:h-[90vh] md:h-[45vh] 2xl:h-[70vh] opacity-80"
         />
         <motion.img
           style={{ x: imgMove }}
           src={images?.ring}
           alt=""
-          className="z-[-2] absolute right-[-60%] sm:right-[-40%] md:right-[-25%] top-[25%] size-[30vh] lg:size-[45vh] transform rotate-[90deg]"
+          className="z-[-2] absolute right-[-60%] sm:right-[-40%] md:right-[-25%] top-[25%] size-[30vh] lg:size-[35vw] transform rotate-[90deg]"
         />
         <motion.img
           style={{ x: startMove }}
@@ -77,7 +77,7 @@ const OurServices = () => {
           <img
             src={images?.net}
             alt="net"
-            className="z-[-2] h-[25vh] sm:h-[30vh] md:h-[35vh] xl:h-[40vh] w-[100vw] top-[-5%] sm:top-[-10%] absolute brightness-90 lg:brightness-100"
+            className="z-[-2] h-[25vh] sm:h-[30vh] md:h-[22vh] xl:h-[40vh] w-[100vw] top-[-5%] sm:top-[-10%] absolute brightness-90 lg:brightness-100"
           />
           <p className="text-[#925FFF] font-semibold text-xs sm:text-sm md:text-md lg:text-lg 2xl:text-xl">
             Our Services
