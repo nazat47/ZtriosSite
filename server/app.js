@@ -20,16 +20,20 @@ app.use(
     credentials: true,
   })
 );
-app.use(mongoSanitize());
-app.use(xss());
-app.use(helmet());
-app.set("trust proxy", 1);
-app.use(
-  rateLimit({
-    windowMs: 1000 * 60 * 15,
-    max: 15,
-  })
-);
+// app.use(mongoSanitize());
+// app.use(xss());
+// app.use(
+//   helmet({
+//     crossOriginResourcePolicy: false,
+//   })
+// );
+// app.set("trust proxy", 1);
+// app.use(
+//   rateLimit({
+//     windowMs: 1000 * 60 * 15,
+//     max: 15,
+//   })
+// );
 
 app.use(express.static("uploads"));
 app.get("/", (req, res) => {
@@ -46,7 +50,7 @@ const port = process.env.PORT || 4000;
 
 const start = async () => {
   try {
-    // await connectDB(process.env.MONGO_URI);
+    await connectDB(process.env.MONGO_URI);
     app.listen(port, () => console.log(`Server running in port ${port}`));
   } catch (error) {
     console.log(error);

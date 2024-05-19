@@ -4,13 +4,14 @@ const bcrypt = require("bcryptjs");
 const { createTokenFields, attachCookies } = require("../utils");
 
 const createUser = async (req, res) => {
-  const { username, password } = req.body;
+  const { email, username, password } = req.body;
   if (!username || !password) {
-    throw new BadRequest("Please insert your username and password");
+    throw new BadRequest("Please insert your email, username and password");
   }
   const salt = await bcrypt.genSalt(10);
   const hashedPass = await bcrypt.hash(password, salt);
   const user = await User.create({
+    email: email ? email : "",
     username,
     password: hashedPass,
   });

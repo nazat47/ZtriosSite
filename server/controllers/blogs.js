@@ -52,6 +52,12 @@ const deleteBlog = async (req, res) => {
   if (!blog) {
     throw new NotFound("Unable to find blog");
   }
+  if (blog?.imageUrl) {
+    const oldImage = path.join(__dirname, "..", "uploads", blog.imageUrl);
+    unlinkSync(oldImage, (err) => {
+      if (err) console.log("unable to delete blog image");
+    });
+  }
   return res.status(200).json({ message: "Blog deleted" });
 };
 
