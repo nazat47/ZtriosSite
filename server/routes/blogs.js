@@ -17,8 +17,8 @@ router
   .get(getAllBlogs);
 router
   .route("/:id")
-  .put(uploadOptions.single("image"), updateBlog)
+  .put(uploadOptions.single("image"), authenticateUser, updateBlog)
   .get(getBlog)
-  .delete(deleteBlog);
+  .delete(authenticateUser, deleteBlog);
 
 module.exports = router;

@@ -6,11 +6,13 @@ const createToken = (payload) => {
 const validateToken = (token) => {
   return jwt.verify(token, process.env.JWT_SECRET);
 };
-const attachCookies = async(res, user) => {
+
+const attachCookies = (res, user) => {
   const token = createToken(user);
-  res.cookie("token", token, {
+  res.cookie("ztriosToken", token, {
     httpOnly: true,
-    secure: true
+    secure: process.env.NODE_ENV === "production",
+    expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 10),
   });
 };
 module.exports = { createToken, validateToken, attachCookies };

@@ -6,12 +6,14 @@ import DeleteBlog from "./DeleteBlog";
 import axios from "axios";
 import { routeUrl } from "../../utils/links";
 import EditBlog from "./EditBlog";
+import { useNavigate } from "react-router-dom";
 
 const AdminBlogs = () => {
   const [addOpen, setAddOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [blogData, setBlogdata] = useState({});
+  const navigate = useNavigate();
 
   const { data, isLoading } = useQuery({
     queryKey: ["blogs"],
@@ -43,10 +45,15 @@ const AdminBlogs = () => {
         <div className="flex flex-col gap-4 w-full p-3 mt-6">
           {data?.map((blog, i) => (
             <div
-              className="p-4 flex justify-between items-center bg-white rounded shadow-md"
+              className="p-4 flex justify-between items-center bg-white rounded shadow-md cursor-pointer"
               key={i}
             >
-              <p className="font-bold text-xl text-gray-700">{blog?.title}</p>
+              <p
+                onClick={() => navigate(`/blog/${blog?._id}`)}
+                className="font-bold text-xl text-gray-700"
+              >
+                {blog?.title}
+              </p>
               <div className="flex gap-4">
                 <button
                   onClick={() => setEditOpen(true) || setBlogdata(blog)}

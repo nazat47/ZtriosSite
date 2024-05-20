@@ -16,7 +16,9 @@ const AdminLogin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post(`${routeUrl}/user/login`, formData);
+      const { data } = await axios.post(`${routeUrl}/user/login`, formData, {
+        withCredentials: true,
+      });
       dispatch(signInSuccess(data));
       navigate("/dashboard");
     } catch (error) {
@@ -29,7 +31,7 @@ const AdminLogin = () => {
       navigate("/dashboard");
     }
   }, []);
-  
+
   return (
     <div className="h-screen w-screen bg-slate-200 flex items-center justify-center">
       <div className="size-[500px] rounded-lg shadow-lg bg-white p-6 flex items-center flex-col gap-4">

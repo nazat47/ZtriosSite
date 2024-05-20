@@ -11,23 +11,26 @@ const rateLimit = require("express-rate-limit");
 const helmet = require("helmet");
 const mongoSanitize = require("express-mongo-sanitize");
 const xss = require("xss-clean");
+const cookieParser = require("cookie-parser");
 const app = express();
 
 app.use(express.json());
+app.use(cookieParser());
 app.use(
   cors({
-    origin: ["http://localhost:3000"],
+    origin: "http://localhost:3000",
     credentials: true,
   })
 );
-// app.use(mongoSanitize());
-// app.use(xss());
-// app.use(
-//   helmet({
-//     crossOriginResourcePolicy: false,
-//   })
-// );
-// app.set("trust proxy", 1);
+
+app.use(mongoSanitize());
+app.use(xss());
+app.use(
+  helmet({
+    crossOriginResourcePolicy: false,
+  })
+);
+app.set("trust proxy", 1);
 // app.use(
 //   rateLimit({
 //     windowMs: 1000 * 60 * 15,
@@ -46,7 +49,7 @@ app.use("/api/v1/blogs", blogsRoute);
 app.use(routeNotFound);
 app.use(errorHandler);
 
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 3001;
 
 const start = async () => {
   try {

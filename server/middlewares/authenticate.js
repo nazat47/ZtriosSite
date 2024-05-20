@@ -2,9 +2,7 @@ const { Unauthorized } = require("../errors");
 const { validateToken } = require("../utils");
 
 const authenticateUser = async (req, res, next) => {
-  const token = req.cookies?.token;
-
-  console.log(req);
+  const token = req.cookies?.ztriosToken;
   if (!token) {
     throw new Unauthorized("User not authenticated");
   }

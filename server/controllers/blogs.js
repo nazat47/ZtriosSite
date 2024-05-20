@@ -4,9 +4,9 @@ const Blogs = require("../models/blogs");
 const path = require("path");
 
 const createBlog = async (req, res) => {
-  const { title, text } = req.body;
-  if (!title || !text) {
-    throw new BadRequest("Plase insert blog title and text");
+  const { title, text, subTitle } = req.body;
+  if (!title || !text || !subTitle) {
+    throw new BadRequest("Plase insert blog title, sub title and text");
   }
   if (!req.file) {
     throw new BadRequest("Please upload blog image");
@@ -15,6 +15,7 @@ const createBlog = async (req, res) => {
     const blog = await Blogs.create({
       title,
       text,
+      subTitle,
       imageUrl: req.file?.filename,
     });
     if (!blog) {
@@ -63,9 +64,9 @@ const deleteBlog = async (req, res) => {
 
 const updateBlog = async (req, res) => {
   const { id } = req.params;
-  const { title, text } = req.body;
-  if (!title || !text) {
-    throw new BadRequest("Plase insert blog title and text");
+  const { title, text, subTitle } = req.body;
+  if (!title || !text || !subTitle) {
+    throw new BadRequest("Plase insert blog title, sub title and text");
   }
   try {
     const blog = await Blogs.findById(id);
@@ -83,6 +84,7 @@ const updateBlog = async (req, res) => {
     }
     blog.title = title;
     blog.text = text;
+    blog.subTitle = subTitle;
     await blog.save();
     return res.status(201).json(blog);
   } catch (error) {
