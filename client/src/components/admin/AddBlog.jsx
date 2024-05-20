@@ -92,33 +92,32 @@ const AddBlog = ({ addOpen, setAddOpen }) => {
       }`}
     >
       <div
-        className={`relative bg-white rounded-lg max-h-[90vh] w-[70vw] p-3 animate-scaleUp`}
+        className={`relative bg-white rounded-lg max-h-[90vh] w-[95vw] sm:w-[85vw] lg:w-[70vw] p-3 animate-scaleUp overflow-hidden`}
       >
         <MdClose
-          className="absolute top-2 right-2 cursor-pointer"
+          className="absolute top-2 right-2 cursor-pointer size-[25px] md:size-[35px]"
           onClick={handleClose}
-          size={35}
         />
         <div className="overflow-y-auto max-h-[80vh] mt-12">
-          <h1 className="font-bold text-2xl text-center">Add Blog</h1>
-          <div className="my-6 flex flex-col items-start justify-center gap-4 min-h-[85vh] px-6">
+          <h1 className="font-bold text-lg md:text-2xl text-center">Add Blog</h1>
+          <div className="my-6 flex flex-col items-start justify-center gap-4 min-h-[80vh] px-2 md:px-6">
             {file && (
               <div className="relative group w-full h-auto">
                 <img
                   src={URL.createObjectURL(file)}
                   alt="blog"
-                  className="w-[80%] h-[200px] rounded group-hover:brightness-50 mx-auto shadow-lg border border-gray-200"
+                  className="w-[100%] md:w-[80%] h-[200px] rounded group-hover:brightness-50 mx-auto shadow-lg border border-gray-200"
                 />
                 <MdClose
                   onClick={() => setFile(null)}
-                  className="cursor-pointer absolute top-2 right-[11%] text-white z-[2] hidden group-hover:block"
+                  className="cursor-pointer absolute top-2 right-[5%] md:right-[11%] text-white z-[2] hidden group-hover:block"
                   size={30}
                 />
               </div>
             )}
             <form
               onSubmit={(e) => handleSubmit(e)}
-              className="flex flex-col gap-4 w-full h-full"
+              className="flex flex-col gap-4 w-full h-auto"
             >
               <input
                 onChange={(e) =>
@@ -146,7 +145,7 @@ const AddBlog = ({ addOpen, setAddOpen }) => {
                 formats={formats}
                 theme="snow"
                 placeholder="Description"
-                className="h-[300px] mb-12"
+                className="h-[400px] lg:h-[300px] mb-[120px] md:mb-[70px] xl:mb-12"
               />
 
               <label

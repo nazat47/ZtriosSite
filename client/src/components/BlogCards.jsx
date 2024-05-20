@@ -11,13 +11,16 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { baseUrl, routeUrl } from "../utils/links";
 
-const BlogCards = () => {
+const BlogCards = ({ related = false, id }) => {
   const navigate = useNavigate();
   const { data: allBlogs, isLoading } = useQuery({
     queryKey: ["allBlogs"],
     queryFn: async () => {
       try {
         const { data } = await axios.get(`${routeUrl}/blogs`);
+        if (related) {
+          return data?.filter((blog) => blog._id !== id).slice(0, 3);
+        }
         return data;
       } catch (error) {
         console.log(error);
@@ -44,7 +47,7 @@ const BlogCards = () => {
             >
               <div
                 onClick={() => navigate(`/blog/${blog?._id}`)}
-                className="w-full h-[200px] lg:min-h-[270px] flex flex-col lg:gap-2 xl:gap-3 items-center justify-start text-left rounded-xl sm:p-3 lg:p-4 shadow-custom bg-white "
+                className="w-full h-[250px] lg:min-h-[350px] flex flex-col lg:gap-2 xl:gap-3 items-center justify-start text-left rounded-xl sm:p-3 lg:p-4 shadow-custom bg-white "
               >
                 <img
                   src={`${baseUrl}/${blog?.imageUrl}`}
@@ -55,7 +58,7 @@ const BlogCards = () => {
                   {blog?.title}
                 </p>
                 <ReactQuill
-                  value={blog?.text.substr(0,50)}
+                  value={blog?.text.substr(0, 50)}
                   theme="bubble"
                   readOnly={true}
                   className="w-full"
@@ -78,7 +81,7 @@ const BlogCards = () => {
             <SwiperSlide className="p-3 cursor-grab" key={i}>
               <div
                 onClick={() => navigate(`/blog/${blog?._id}`)}
-                className="w-[80%] h-[280px] mx-auto flex flex-col gap-2 items-center justify-start text-left rounded-xl p-3 shadow-custom bg-white"
+                className="w-[80%] h-[300px] mx-auto flex flex-col gap-2 items-center justify-start text-left rounded-xl p-3 shadow-custom bg-white"
               >
                 <img
                   src={`${baseUrl}/${blog?.imageUrl}`}
@@ -88,7 +91,12 @@ const BlogCards = () => {
                 <p className="w-full font-bold mt-3 text-[20px]">
                   {blog?.title}
                 </p>
-                <p className="text-sm line-clamp-2">{blog?.text}</p>
+                <ReactQuill
+                  value={blog?.text.substr(0, 50)}
+                  theme="bubble"
+                  readOnly={true}
+                  className="w-full"
+                />
               </div>
             </SwiperSlide>
           ))}

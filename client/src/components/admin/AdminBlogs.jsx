@@ -50,20 +50,20 @@ const AdminBlogs = () => {
             >
               <p
                 onClick={() => navigate(`/blog/${blog?._id}`)}
-                className="font-bold text-xl text-gray-700"
+                className="font-bold text-md md:text-xl text-gray-700"
               >
                 {blog?.title}
               </p>
               <div className="flex gap-4">
                 <button
                   onClick={() => setEditOpen(true) || setBlogdata(blog)}
-                  className="p-2 rounded hover:underline text-blue-600 font-bold"
+                  className="p-2 rounded hover:underline text-blue-600 font-bold text-sm md:text-lg"
                 >
                   Edit
                 </button>
                 <button
                   onClick={() => setDeleteOpen(true) || setBlogdata(blog)}
-                  className="p-2 rounded hover:underline text-red-600 font-bold"
+                  className="p-2 rounded hover:underline text-red-600 font-bold text-sm md:text-lg"
                 >
                   Delete
                 </button>

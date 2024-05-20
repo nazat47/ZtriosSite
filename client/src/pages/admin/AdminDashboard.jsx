@@ -4,7 +4,7 @@ import AdminBlogs from "../../components/admin/AdminBlogs";
 
 const AdminDashboard = () => {
   return (
-    <div className="flex gap-2 w-full">
+    <div className="flex flex-col sm:flex-row gap-2 w-full">
       <Sidebar />
       <AdminBlogs />
     </div>

@@ -38,7 +38,7 @@ const getBlog = async (req, res) => {
   return res.status(200).json(blog);
 };
 const getAllBlogs = async (req, res) => {
-  const blogs = await Blogs.find({});
+  const blogs = await Blogs.find({}).sort({ createdAt: -1 });
   if (!blogs) {
     throw new NotFound("No blogs found");
   }

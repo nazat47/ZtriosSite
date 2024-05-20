@@ -24,7 +24,9 @@ const BlogDetails = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [id]);
+
   if (isLoading) return <p>Loading blogs...</p>;
+
   return (
     <div className="h-auto w-full flex flex-col items-center text-center gap-8 mt-[60px] xl:mt-[80px]">
       <div className="flex flex-col items-center gap-6 sm:gap-4 xl:gap-8 min-h-[50vh] w-full">
@@ -45,7 +47,7 @@ const BlogDetails = () => {
       </div>
       <div className="flex flex-col items-center justify-center w-full mt-[100px]">
         <h1 className="font-bold text-[30px] md:text-[40px]">Related Blogs </h1>
-        <BlogCards />
+        <BlogCards related={true} id={blogData?._id} />
       </div>
     </div>
   );
