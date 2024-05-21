@@ -3,18 +3,24 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { MdClose } from "react-icons/md";
 import { RiImageAddFill } from "react-icons/ri";
+import { Controller, useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { baseUrl, routeUrl } from "../../utils/links";
 
 const EditBlog = ({ editOpen, setEditOpen, blog }) => {
-  const [formData, setFormData] = useState({
-    title: blog?.title,
-    text: blog?.text,
-    subTitle: blog?.subTitle ? blog?.subTitle : "",
-  });
+  const {
+    register,
+    handleSubmit,
+    control,
+    getValues,
+    setValue,
+    formState: { errors, isSubmitting },
+    reset: formReset,
+  } = useForm();
   const [file, setFile] = useState(null);
   const queryClient = useQueryClient();
+
   const modules = {
     toolbar: [
       [{ header: "1" }, { header: "2" }, { font: [] }],
@@ -71,23 +77,28 @@ const EditBlog = ({ editOpen, setEditOpen, blog }) => {
     },
   });
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const onSubmit = (data) => {
     const forms = new FormData();
-    forms.append("title", formData.title);
-    forms.append("text", formData.text);
-    forms.append("subTitle", formData.subTitle);
+    forms.append("title", data?.title);
+    forms.append("text", data?.text);
+    forms.append("subTitle", data?.subTitle);
     if (file) forms.append("image", file);
     mutate(forms);
     setFile(null);
+    formReset();
   };
+  const handleClose = () => {
+    setEditOpen(false);
+    setFile(null);
+    formReset();
+  };
+
   useEffect(() => {
-    setFormData({
-      title: blog?.title,
-      text: blog?.text,
-      subTitle: blog?.subTitle ? blog?.subTitle : "",
-    });
+    setValue("title", blog?.title);
+    setValue("subTitle", blog?.subTitle);
+    setValue("text", blog?.text);
   }, [blog]);
+
   return (
     <div
       className={`fixed inset-0  items-center justify-center bg-[#00000042] z-[5] transition-all duration-300 ${
@@ -99,7 +110,7 @@ const EditBlog = ({ editOpen, setEditOpen, blog }) => {
       >
         <MdClose
           className="absolute top-2 right-2 cursor-pointer size-[25px] md:size-[35px]"
-          onClick={() => setEditOpen(false) || setFile(null)}
+          onClick={() => handleClose()}
           size={30}
         />
         <div className="overflow-y-auto max-h-[80vh] mt-12">
@@ -126,39 +137,55 @@ const EditBlog = ({ editOpen, setEditOpen, blog }) => {
               </div>
             )}
             <form
-              onSubmit={(e) => handleSubmit(e)}
+              onSubmit={handleSubmit(onSubmit)}
               className="flex flex-col gap-4 w-full h-auto"
             >
+              {errors?.title && (
+                <p className="text-red-600">* {errors?.title?.message}</p>
+              )}
               <input
-                onChange={(e) =>
-                  setFormData({ ...formData, [e.target.name]: e.target.value })
-                }
+                {...register("title", {
+                  required: "Blog title is required",
+                })}
                 type="text"
                 name="title"
-                value={formData?.title}
-                required
+                value={getValues("title")}
                 placeholder="Title"
                 className="p-3 w-full rounded border border-gray-200 outline-purple-200"
               />
+              {errors?.subTitle && (
+                <p className="text-red-600">* {errors?.subTitle?.message}</p>
+              )}
               <input
-                onChange={(e) =>
-                  setFormData({ ...formData, [e.target.name]: e.target.value })
-                }
+                {...register("subTitle", {
+                  required: "Short description is required",
+                })}
                 type="text"
                 name="subTitle"
-                value={formData?.subTitle}
-                required
+                value={getValues("subTitle")}
                 placeholder="Short Description"
                 className="p-3 w-full rounded border border-gray-200 outline-purple-200"
               />
-              <ReactQuill
-                onChange={(value) => setFormData({ ...formData, text: value })}
-                value={formData?.text}
-                modules={modules}
-                formats={formats}
-                theme="snow"
-                placeholder="Description"
-                className="h-[400px] lg:h-[300px] mb-[120px] md:mb-[70px] xl:mb-12"
+              {errors?.text && (
+                <p className="text-red-600">* {errors?.text?.message}</p>
+              )}
+              <Controller
+                name="text"
+                control={control}
+                rules={{
+                  required: "Blog Description is required",
+                }}
+                render={({ field }) => (
+                  <ReactQuill
+                    onChange={(value) => field.onChange(value)}
+                    value={getValues("text")}
+                    modules={modules}
+                    formats={formats}
+                    theme="snow"
+                    placeholder="Description"
+                    className="h-[400px] lg:h-[300px] mb-[120px] md:mb-[70px] xl:mb-12"
+                  />
+                )}
               />
               <label
                 htmlFor="edit"
@@ -177,10 +204,10 @@ const EditBlog = ({ editOpen, setEditOpen, blog }) => {
               />
 
               <button
-                disabled={isPending}
+                disabled={isPending || isSubmitting}
                 type="submit"
                 className={`p-2 w-[100px] mx-auto rounded border border-gray-200 outline-purple-200 bg-slate-600 text-white font-bold text-lg hover:bg-slate-700 ${
-                  isPending ? "cursor-not-allowed" : ""
+                  isPending || isSubmitting ? "cursor-not-allowed" : ""
                 }`}
               >
                 Update

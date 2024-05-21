@@ -2,19 +2,24 @@ import React, { useState } from "react";
 import { MdClose } from "react-icons/md";
 import { RiImageAddFill } from "react-icons/ri";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { Controller, useForm } from "react-hook-form";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import axios from "axios";
 import { routeUrl } from "../../utils/links";
 
 const AddBlog = ({ addOpen, setAddOpen }) => {
-  const [formData, setFormData] = useState({
-    title: "",
-    text: "",
-    subTitle: "",
-  });
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors, isSubmitting },
+    reset: formReset,
+  } = useForm();
   const [file, setFile] = useState(null);
+  const [errorMsg, setErrorMsg] = useState(null);
   const queryClient = useQueryClient();
+
   const modules = {
     toolbar: [
       [{ header: "1" }, { header: "2" }, { font: [] }],
@@ -50,6 +55,7 @@ const AddBlog = ({ addOpen, setAddOpen }) => {
   ];
   const handleImage = (e) => {
     setFile(e.target.files[0]);
+    setErrorMsg(null);
   };
 
   const { mutate, isPending, reset } = useMutation({
@@ -70,20 +76,24 @@ const AddBlog = ({ addOpen, setAddOpen }) => {
       });
     },
   });
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const formsData = new FormData();
-    formsData.append("title", formData.title);
-    formsData.append("text", formData.text);
-    formsData.append("subTitle", formData.subTitle);
-    formsData.append("image", file);
-    mutate(formsData);
-    setFile(null);
-    e.target.reset();
+  const onSubmit = (data) => {
+    if (!file) {
+      setErrorMsg("Please upload blog image");
+    } else {
+      const formsData = new FormData();
+      formsData.append("title", data?.title);
+      formsData.append("text", data?.text);
+      formsData.append("subTitle", data?.subTitle);
+      formsData.append("image", file);
+      mutate(formsData);
+      setFile(null);
+      formReset();
+    }
   };
   const handleClose = () => {
     setAddOpen(false);
     setFile(null);
+    formReset();
   };
   return (
     <div
@@ -99,7 +109,9 @@ const AddBlog = ({ addOpen, setAddOpen }) => {
           onClick={handleClose}
         />
         <div className="overflow-y-auto max-h-[80vh] mt-12">
-          <h1 className="font-bold text-lg md:text-2xl text-center">Add Blog</h1>
+          <h1 className="font-bold text-lg md:text-2xl text-center">
+            Add Blog
+          </h1>
           <div className="my-6 flex flex-col items-start justify-center gap-4 min-h-[80vh] px-2 md:px-6">
             {file && (
               <div className="relative group w-full h-auto">
@@ -116,38 +128,55 @@ const AddBlog = ({ addOpen, setAddOpen }) => {
               </div>
             )}
             <form
-              onSubmit={(e) => handleSubmit(e)}
+              onSubmit={handleSubmit(onSubmit)}
               className="flex flex-col gap-4 w-full h-auto"
             >
+              {errors?.title && (
+                <p className="text-red-600">* {errors?.title?.message}</p>
+              )}
               <input
-                onChange={(e) =>
-                  setFormData({ ...formData, [e.target.name]: e.target.value })
-                }
+                {...register("title", {
+                  required: "Blog title is required",
+                })}
                 type="text"
                 name="title"
-                required
                 placeholder="Title"
                 className="p-3 w-full rounded border border-gray-200 outline-purple-200"
               />
+              {errors?.subTitle && (
+                <p className="text-red-600">* {errors?.subTitle?.message}</p>
+              )}
               <input
-                onChange={(e) =>
-                  setFormData({ ...formData, [e.target.name]: e.target.value })
-                }
+                {...register("subTitle", {
+                  required: "Short description is required",
+                })}
                 type="text"
                 name="subTitle"
-                required
                 placeholder="Short Description"
                 className="p-3 w-full rounded border border-gray-200 outline-purple-200"
               />
-              <ReactQuill
-                onChange={(value) => setFormData({ ...formData, text: value })}
-                modules={modules}
-                formats={formats}
-                theme="snow"
-                placeholder="Description"
-                className="h-[400px] lg:h-[300px] mb-[120px] md:mb-[70px] xl:mb-12"
+              {errors?.text && (
+                <p className="text-red-600">* {errors?.text?.message}</p>
+              )}
+              <Controller
+                name="text"
+                control={control}
+                rules={{
+                  required: "Blog Description is required",
+                }}
+                render={({ field }) => (
+                  <ReactQuill
+                    {...field}
+                    onChange={(value) => field.onChange(value)}
+                    modules={modules}
+                    formats={formats}
+                    theme="snow"
+                    placeholder="Description"
+                    className="h-[400px] lg:h-[300px] mb-[120px] md:mb-[70px] xl:mb-12"
+                  />
+                )}
               />
-
+              {errorMsg && <p className="text-red-600">{errorMsg}</p>}
               <label
                 htmlFor="file"
                 className="w-full h-[50px] bg-gray-200 rounded-lg p-3 cursor-pointer flex justify-between items-center"
@@ -156,6 +185,7 @@ const AddBlog = ({ addOpen, setAddOpen }) => {
                 <RiImageAddFill size={35} className="text-gray-700" />
               </label>
               <input
+                {...register("image")}
                 onChange={handleImage}
                 hidden
                 id="file"
@@ -165,10 +195,10 @@ const AddBlog = ({ addOpen, setAddOpen }) => {
               />
 
               <button
-                disabled={isPending}
+                disabled={isPending || isSubmitting}
                 type="submit"
                 className={`p-2 w-[100px] mx-auto rounded border border-gray-200 outline-purple-200 bg-slate-600 text-white font-bold text-lg hover:bg-slate-700 ${
-                  isPending ? "cursor-not-allowed" : ""
+                  isPending || isSubmitting ? "cursor-not-allowed" : ""
                 }`}
               >
                 Add
