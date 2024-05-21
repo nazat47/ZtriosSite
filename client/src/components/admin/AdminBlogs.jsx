@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { MdAdd } from "react-icons/md";
 import { useQuery } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { DataGrid } from "@material-ui/data-grid";
 import AddBlog from "./AddBlog";
 import DeleteBlog from "./DeleteBlog";
-import axios from "axios";
 import { routeUrl } from "../../utils/links";
 import EditBlog from "./EditBlog";
-import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const AdminBlogs = () => {
   const [addOpen, setAddOpen] = useState(false);
@@ -24,14 +26,90 @@ const AdminBlogs = () => {
         });
         return data;
       } catch (error) {
-        console.log(error);
+        toast.error("Failed to load blogs, try again later");
       }
     },
+    staleTime: 1000 * 60 * 15,
+  });
+  const columns = [
+    {
+      field: "id",
+      headerName: "Blog Id",
+      minWidth: 200,
+      flex: 1,
+      renderCell: (params) => {
+        return (
+          <p className="text-sm md:text-md lg:text-lg text-gray-800 cursor-pointer">
+            {params.row.id}
+          </p>
+        );
+      },
+    },
+    {
+      field: "title",
+      headerName: "Blog title",
+      minWidth: 250,
+      flex: 1,
+      renderCell: (params) => {
+        return (
+          <div
+            onClick={() => navigate(`/blog/${params.id}`)}
+            className="w-full h-full cursor-pointer flex items-center justify-start"
+          >
+            <p className="text-sm md:text-md lg:text-lg text-gray-800 cursor-pointer">
+              {params.row.title}
+            </p>
+          </div>
+        );
+      },
+    },
+    {
+      field: "Edit",
+      flex: 0.3,
+      minWidth: 100,
+      sortable: false,
+      renderCell: (params) => {
+        return (
+          <button
+            onClick={() => setEditOpen(true) || setBlogdata(params?.row)}
+            className="p-2 rounded hover:underline text-blue-600 font-semibold text-sm lg:text-lg"
+          >
+            Edit
+          </button>
+        );
+      },
+    },
+    {
+      field: "Delete",
+      flex: 0.3,
+      minWidth: 100,
+      sortable: false,
+      renderCell: (params) => {
+        return (
+          <button
+            onClick={() => setDeleteOpen(true) || setBlogdata(params?.row)}
+            className="p-2 rounded hover:underline text-red-600 font-semibold text-sm lg:text-lg"
+          >
+            Delete
+          </button>
+        );
+      },
+    },
+  ];
+  const row = [];
+  data?.forEach((blog) => {
+    row.push({
+      id: blog?._id,
+      title: blog?.title,
+      subTitle: blog?.subTitle,
+      text: blog?.text,
+      imageUrl: blog?.imageUrl,
+    });
   });
   if (isLoading) return <p>Loading...</p>;
   return (
     <>
-      <div className="w-full min-h-screen bg-white">
+      <div className="w-full min-h-screen bg-white p-4">
         <div className="flex items-center justify-between border-b border-gray-400 min-h-[70px] px-4">
           <h1 className="font-bold text-2xl">Blogs</h1>
           <button
@@ -42,41 +120,21 @@ const AdminBlogs = () => {
             <p>Add</p>
           </button>
         </div>
-        <div className="flex flex-col gap-4 w-full p-3 mt-6">
-          {data?.map((blog, i) => (
-            <div
-              className="p-4 flex justify-between items-center bg-white rounded shadow-md cursor-pointer"
-              key={i}
-            >
-              <p
-                onClick={() => navigate(`/blog/${blog?._id}`)}
-                className="font-bold text-md md:text-xl text-gray-700"
-              >
-                {blog?.title}
-              </p>
-              <div className="flex gap-4">
-                <button
-                  onClick={() => setEditOpen(true) || setBlogdata(blog)}
-                  className="p-2 rounded hover:underline text-blue-600 font-bold text-sm md:text-lg"
-                >
-                  Edit
-                </button>
-                <button
-                  onClick={() => setDeleteOpen(true) || setBlogdata(blog)}
-                  className="p-2 rounded hover:underline text-red-600 font-bold text-sm md:text-lg"
-                >
-                  Delete
-                </button>
-              </div>
-            </div>
-          ))}
+        <div className="w-[100%] h-[75vh] sm:h-[80vh] pt-1 mt-2 bg-white">
+          <DataGrid
+            columns={columns}
+            rows={row}
+            pageSize={10}
+            rowHeight={70}
+            disableSelectionOnClick
+          />
         </div>
       </div>
       <AddBlog addOpen={addOpen} setAddOpen={setAddOpen} />
       <DeleteBlog
         deleteOpen={deleteOpen}
         setDeleteOpen={setDeleteOpen}
-        blogId={blogData?._id}
+        blogId={blogData?.id}
       />
       <EditBlog editOpen={editOpen} setEditOpen={setEditOpen} blog={blogData} />
     </>

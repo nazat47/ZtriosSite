@@ -7,6 +7,7 @@ import { Controller, useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { baseUrl, routeUrl } from "../../utils/links";
+import { toast } from "react-toastify";
 
 const EditBlog = ({ editOpen, setEditOpen, blog }) => {
   const {
@@ -61,11 +62,11 @@ const EditBlog = ({ editOpen, setEditOpen, blog }) => {
   const { mutate, isPending, reset } = useMutation({
     mutationFn: async (forms) => {
       try {
-        await axios.put(`${routeUrl}/blogs/${blog?._id}`, forms, {
+        await axios.put(`${routeUrl}/blogs/${blog?.id}`, forms, {
           withCredentials: true,
         });
       } catch (error) {
-        console.log(error);
+        toast.error(error?.response?.data?.msg || "Something went wrong")
       }
     },
     onSuccess: () => {
@@ -97,6 +98,7 @@ const EditBlog = ({ editOpen, setEditOpen, blog }) => {
     setValue("title", blog?.title);
     setValue("subTitle", blog?.subTitle);
     setValue("text", blog?.text);
+    // eslint-disable-next-line 
   }, [blog]);
 
   return (
@@ -149,7 +151,6 @@ const EditBlog = ({ editOpen, setEditOpen, blog }) => {
                 })}
                 type="text"
                 name="title"
-                value={getValues("title")}
                 placeholder="Title"
                 className="p-3 w-full rounded border border-gray-200 outline-purple-200"
               />
@@ -162,7 +163,6 @@ const EditBlog = ({ editOpen, setEditOpen, blog }) => {
                 })}
                 type="text"
                 name="subTitle"
-                value={getValues("subTitle")}
                 placeholder="Short Description"
                 className="p-3 w-full rounded border border-gray-200 outline-purple-200"
               />

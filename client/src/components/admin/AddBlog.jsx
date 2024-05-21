@@ -7,6 +7,7 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import axios from "axios";
 import { routeUrl } from "../../utils/links";
+import { toast } from "react-toastify";
 
 const AddBlog = ({ addOpen, setAddOpen }) => {
   const {
@@ -65,7 +66,7 @@ const AddBlog = ({ addOpen, setAddOpen }) => {
           withCredentials: true,
         });
       } catch (error) {
-        console.log(error);
+        toast.error(error?.response?.data?.msg || "Something went wrong");
       }
     },
     onSuccess: () => {

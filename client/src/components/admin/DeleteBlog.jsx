@@ -2,6 +2,7 @@ import axios from "axios";
 import React from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { routeUrl } from "../../utils/links";
+import { toast } from "react-toastify";
 
 const DeleteBlog = ({ setDeleteOpen, deleteOpen, blogId }) => {
   const queryClient = useQueryClient();
@@ -13,7 +14,7 @@ const DeleteBlog = ({ setDeleteOpen, deleteOpen, blogId }) => {
         });
       } catch (error) {
         reset();
-        console.log(error);
+        toast.error("Something went wrong");
       }
     },
     onSuccess: () => {

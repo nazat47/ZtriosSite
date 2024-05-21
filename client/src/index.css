@@ -36,6 +36,7 @@ body {
   -webkit-text-fill-color: transparent;
 }
 ::-webkit-scrollbar {
+  height: 7px;
   width: 10px;
 }
 
