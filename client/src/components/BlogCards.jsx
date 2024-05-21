@@ -1,32 +1,14 @@
 import React from "react";
-import { useQuery } from "@tanstack/react-query";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import { baseUrl } from "../utils/links";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import { baseUrl, routeUrl } from "../utils/links";
 
-const BlogCards = ({ related = false, id }) => {
+const BlogCards = ({ allBlogs }) => {
   const navigate = useNavigate();
-  const { data: allBlogs, isLoading } = useQuery({
-    queryKey: ["allBlogs"],
-    queryFn: async () => {
-      try {
-        const { data } = await axios.get(`${routeUrl}/blogs`);
-        if (related) {
-          return data?.filter((blog) => blog._id !== id).slice(0, 3);
-        }
-        return data;
-      } catch (error) {
-        console.log(error);
-      }
-    },
-  });
-  if (isLoading) return <p>Loading blogs...</p>;
-
   return (
     <>
       <div className="hidden sm:block w-full h-[auto]">

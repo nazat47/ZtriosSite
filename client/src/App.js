@@ -83,9 +83,6 @@ function App() {
           newestOnTop
           closeOnClick
           rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
           theme="light"
         />
       </BrowserRouter>

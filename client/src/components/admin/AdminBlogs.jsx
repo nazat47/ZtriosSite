@@ -9,6 +9,7 @@ import DeleteBlog from "./DeleteBlog";
 import { routeUrl } from "../../utils/links";
 import EditBlog from "./EditBlog";
 import { toast } from "react-toastify";
+import AdminBlogsSkeleton from "../skeletons/AdminBlogsSkeleton";
 
 const AdminBlogs = () => {
   const [addOpen, setAddOpen] = useState(false);
@@ -29,7 +30,7 @@ const AdminBlogs = () => {
         toast.error("Failed to load blogs, try again later");
       }
     },
-    staleTime: 1000 * 60 * 15,
+    staleTime: 1000 * 60 * 10,
   });
   const columns = [
     {
@@ -56,7 +57,7 @@ const AdminBlogs = () => {
             onClick={() => navigate(`/blog/${params.id}`)}
             className="w-full h-full cursor-pointer flex items-center justify-start"
           >
-            <p className="text-sm md:text-md lg:text-lg text-gray-800 cursor-pointer">
+            <p className="text-sm md:text-md lg:text-lg text-gray-600 cursor-pointer font-semibold">
               {params.row.title}
             </p>
           </div>
@@ -106,7 +107,7 @@ const AdminBlogs = () => {
       imageUrl: blog?.imageUrl,
     });
   });
-  if (isLoading) return <p>Loading...</p>;
+
   return (
     <>
       <div className="w-full min-h-screen bg-white p-4">
@@ -120,15 +121,19 @@ const AdminBlogs = () => {
             <p>Add</p>
           </button>
         </div>
-        <div className="w-[100%] h-[75vh] sm:h-[80vh] pt-1 mt-2 bg-white">
-          <DataGrid
-            columns={columns}
-            rows={row}
-            pageSize={10}
-            rowHeight={70}
-            disableSelectionOnClick
-          />
-        </div>
+        {isLoading ? (
+          <AdminBlogsSkeleton />
+        ) : (
+          <div className="w-[100%] h-[75vh] sm:h-[80vh] pt-1 mt-2 bg-white">
+            <DataGrid
+              columns={columns}
+              rows={row}
+              pageSize={10}
+              rowHeight={70}
+              disableSelectionOnClick
+            />
+          </div>
+        )}
       </div>
       <AddBlog addOpen={addOpen} setAddOpen={setAddOpen} />
       <DeleteBlog

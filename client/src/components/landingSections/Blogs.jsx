@@ -1,7 +1,7 @@
 import React from "react";
 import { images } from "../../assets";
 import { motion, useScroll, useTransform } from "framer-motion";
-import BlogCards from "../BlogCards";
+import AllBlogs from "../AllBlogs";
 
 const Blogs = () => {
   const { scrollYProgress } = useScroll({
@@ -48,7 +48,7 @@ const Blogs = () => {
           Blogs
         </h1>
       </div>
-      <BlogCards />
+      <AllBlogs />
     </div>
   );
 };
