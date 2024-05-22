@@ -6,10 +6,10 @@ import axios from "axios";
 import { DataGrid } from "@material-ui/data-grid";
 import { routeUrl } from "../../../utils/links";
 import { toast } from "react-toastify";
-import AdminBlogsSkeleton from "../../skeletons/AdminBlogsSkeleton";
 import AddCaseStudy from "./AddCaseStudy";
 import DeleteCaseStudy from "./DeleteCaseStudy";
 import EditCaseStudy from "./EditCaseStudy";
+import AdminTablesSkeleton from "../../skeletons/AdminTablesSkeleton";
 
 const AdminAllCaseStudies = () => {
   const [addOpen, setAddOpen] = useState(false);
@@ -122,7 +122,7 @@ const AdminAllCaseStudies = () => {
           </button>
         </div>
         {isLoading ? (
-          <AdminBlogsSkeleton />
+          <AdminTablesSkeleton />
         ) : (
           <div className="w-[100%] h-[75vh] sm:h-[80vh] pt-1 mt-2 bg-white">
             <DataGrid

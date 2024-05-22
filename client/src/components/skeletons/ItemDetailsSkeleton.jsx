@@ -1,6 +1,6 @@
 import React from "react";
 
-const BlogDetailsSkeleton = () => {
+const ItemDetailsSkeleton = () => {
   return (
     <div className="h-full w-full bg-white flex flex-col items-start justify-center gap-8">
       <div className="h-[80px] bg-gray-200 animate-pulse rounded-lg w-[70%] mx-auto"></div>
@@ -11,4 +11,4 @@ const BlogDetailsSkeleton = () => {
   );
 };
 
-export default BlogDetailsSkeleton;
+export default ItemDetailsSkeleton;

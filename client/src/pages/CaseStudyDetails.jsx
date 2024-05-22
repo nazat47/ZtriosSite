@@ -5,7 +5,7 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import axios from "axios";
 import { baseUrl, routeUrl } from "../utils/links";
-import BlogDetailsSkeleton from "../components/skeletons/BlogDetailsSkeleton";
+import ItemDetailsSkeleton from "../components/skeletons/ItemDetailsSkeleton";
 
 const CaseStudyDetails = () => {
   const { id } = useParams();
@@ -28,7 +28,7 @@ const CaseStudyDetails = () => {
   return (
     <div className="h-auto w-full flex flex-col items-center text-center gap-8 mt-[60px] xl:mt-[80px]">
       {isLoading ? (
-        <BlogDetailsSkeleton />
+        <ItemDetailsSkeleton />
       ) : (
         <div className="flex flex-col items-center gap-6 sm:gap-4 xl:gap-8 min-h-[50vh] w-full">
           <h1 className="font-bold text-[25px] sm:text-[30px] lg:text-[40px] xl:text-[50px]">

@@ -9,7 +9,7 @@ import DeleteBlog from "./DeleteBlog";
 import { routeUrl } from "../../../utils/links";
 import EditBlog from "./EditBlog";
 import { toast } from "react-toastify";
-import AdminBlogsSkeleton from "../../skeletons/AdminBlogsSkeleton";
+import AdminTablesSkeleton from "../../skeletons/AdminTablesSkeleton";
 
 const AdminAllBlogs = () => {
   const [addOpen, setAddOpen] = useState(false);
@@ -122,7 +122,7 @@ const AdminAllBlogs = () => {
           </button>
         </div>
         {isLoading ? (
-          <AdminBlogsSkeleton />
+          <AdminTablesSkeleton />
         ) : (
           <div className="w-[100%] h-[75vh] sm:h-[80vh] pt-1 mt-2 bg-white">
             <DataGrid
