@@ -1,15 +1,15 @@
 import axios from "axios";
 import React from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { routeUrl } from "../../utils/links";
+import { routeUrl } from "../../../utils/links";
 import { toast } from "react-toastify";
 
-const DeleteBlog = ({ setDeleteOpen, deleteOpen, blogId }) => {
+const DeleteCaseStudy = ({ setDeleteOpen, deleteOpen, caseStudyId }) => {
   const queryClient = useQueryClient();
   const { mutate, isPending, reset } = useMutation({
     mutationFn: async (id) => {
       try {
-        await axios.delete(`${routeUrl}/blogs/${id}`, {
+        await axios.delete(`${routeUrl}/case-study/${id}`, {
           withCredentials: true,
         });
       } catch (error) {
@@ -21,13 +21,13 @@ const DeleteBlog = ({ setDeleteOpen, deleteOpen, blogId }) => {
       reset();
       setDeleteOpen(false);
       queryClient.invalidateQueries({
-        queryKey: ["blogs"],
+        queryKey: ["case-studies"],
       });
     },
   });
   const handleDelete = async (e) => {
     e.preventDefault();
-    mutate(blogId);
+    mutate(caseStudyId);
   };
   return (
     <div
@@ -38,7 +38,7 @@ const DeleteBlog = ({ setDeleteOpen, deleteOpen, blogId }) => {
       <div
         className={`relative bg-white rounded-lg min-h-[20vh] w-[500px] p-3 flex flex-col items-center justify-center gap-4 animate-scaleUp`}
       >
-        <p>Are you sure you want to delete this blog?</p>
+        <p>Are you sure you want to delete this case study?</p>
         <div className="flex gap-4 items-center justify-center w-full text-white font-bold">
           <button
             disabled={isPending}
@@ -61,4 +61,4 @@ const DeleteBlog = ({ setDeleteOpen, deleteOpen, blogId }) => {
   );
 };
 
-export default DeleteBlog;
+export default DeleteCaseStudy;

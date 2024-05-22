@@ -4,30 +4,30 @@ import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { DataGrid } from "@material-ui/data-grid";
-import AddBlog from "./AddBlog";
-import DeleteBlog from "./DeleteBlog";
-import { routeUrl } from "../../utils/links";
-import EditBlog from "./EditBlog";
+import { routeUrl } from "../../../utils/links";
 import { toast } from "react-toastify";
-import AdminBlogsSkeleton from "../skeletons/AdminBlogsSkeleton";
+import AdminBlogsSkeleton from "../../skeletons/AdminBlogsSkeleton";
+import AddCaseStudy from "./AddCaseStudy";
+import DeleteCaseStudy from "./DeleteCaseStudy";
+import EditCaseStudy from "./EditCaseStudy";
 
-const AdminBlogs = () => {
+const AdminAllCaseStudies = () => {
   const [addOpen, setAddOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
-  const [blogData, setBlogdata] = useState({});
+  const [caseStudyData, setCaseStudyData] = useState({});
   const navigate = useNavigate();
 
   const { data, isLoading } = useQuery({
-    queryKey: ["blogs"],
+    queryKey: ["case-studies"],
     queryFn: async () => {
       try {
-        const { data } = await axios.get(`${routeUrl}/blogs`, {
+        const { data } = await axios.get(`${routeUrl}/case-study`, {
           withCredentials: true,
         });
         return data;
       } catch (error) {
-        toast.error("Failed to load blogs, try again later");
+        toast.error("Failed to load case studies, try again later");
       }
     },
     staleTime: 1000 * 60 * 10,
@@ -35,7 +35,7 @@ const AdminBlogs = () => {
   const columns = [
     {
       field: "id",
-      headerName: "Blog Id",
+      headerName: "Case Study Id",
       minWidth: 200,
       flex: 1,
       renderCell: (params) => {
@@ -48,13 +48,13 @@ const AdminBlogs = () => {
     },
     {
       field: "title",
-      headerName: "Blog title",
+      headerName: "Case Study title",
       minWidth: 250,
       flex: 1,
       renderCell: (params) => {
         return (
           <div
-            onClick={() => navigate(`/blog/${params.id}`)}
+            onClick={() => navigate(`/casestudy/${params.id}`)}
             className="w-full h-full cursor-pointer flex items-center justify-start"
           >
             <p className="text-sm md:text-md lg:text-lg text-gray-600 cursor-pointer font-semibold">
@@ -72,7 +72,7 @@ const AdminBlogs = () => {
       renderCell: (params) => {
         return (
           <button
-            onClick={() => setEditOpen(true) || setBlogdata(params?.row)}
+            onClick={() => setEditOpen(true) || setCaseStudyData(params?.row)}
             className="p-2 rounded hover:underline text-blue-600 font-semibold text-sm lg:text-lg"
           >
             Edit
@@ -88,7 +88,7 @@ const AdminBlogs = () => {
       renderCell: (params) => {
         return (
           <button
-            onClick={() => setDeleteOpen(true) || setBlogdata(params?.row)}
+            onClick={() => setDeleteOpen(true) || setCaseStudyData(params?.row)}
             className="p-2 rounded hover:underline text-red-600 font-semibold text-sm lg:text-lg"
           >
             Delete
@@ -98,13 +98,13 @@ const AdminBlogs = () => {
     },
   ];
   const row = [];
-  data?.forEach((blog) => {
+  data?.forEach((caseStudy) => {
     row.push({
-      id: blog?._id,
-      title: blog?.title,
-      subTitle: blog?.subTitle,
-      text: blog?.text,
-      imageUrl: blog?.imageUrl,
+      id: caseStudy?._id,
+      title: caseStudy?.title,
+      subTitle: caseStudy?.subTitle,
+      text: caseStudy?.text,
+      imageUrl: caseStudy?.imageUrl,
     });
   });
 
@@ -112,7 +112,7 @@ const AdminBlogs = () => {
     <>
       <div className="w-full min-h-screen bg-white p-4">
         <div className="flex items-center justify-between border-b border-gray-400 min-h-[70px] px-4">
-          <h1 className="font-bold text-2xl">Blogs</h1>
+          <h1 className="font-bold text-2xl">Case Studies</h1>
           <button
             onClick={() => setAddOpen(true)}
             className="flex gap-1 items-center justify-between p-2 px-6 text-white font-bold bg-black rounded hover:bg-purple-800"
@@ -135,15 +135,19 @@ const AdminBlogs = () => {
           </div>
         )}
       </div>
-      <AddBlog addOpen={addOpen} setAddOpen={setAddOpen} />
-      <DeleteBlog
+      <AddCaseStudy addOpen={addOpen} setAddOpen={setAddOpen} />
+      <DeleteCaseStudy
         deleteOpen={deleteOpen}
         setDeleteOpen={setDeleteOpen}
-        blogId={blogData?.id}
+        caseStudyId={caseStudyData?.id}
       />
-      <EditBlog editOpen={editOpen} setEditOpen={setEditOpen} blog={blogData} />
+      <EditCaseStudy
+        editOpen={editOpen}
+        setEditOpen={setEditOpen}
+        caseStudy={caseStudyData}
+      />
     </>
   );
 };
 
-export default AdminBlogs;
+export default AdminAllCaseStudies;

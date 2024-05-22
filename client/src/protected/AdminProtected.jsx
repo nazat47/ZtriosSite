@@ -3,8 +3,7 @@ import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 
 const AdminProtected = ({ children }) => {
-  const { isAuthenticated, currentUser } = useSelector((state) => state.user);
-  console.log(currentUser);
+  const { isAuthenticated } = useSelector((state) => state.user);
   return isAuthenticated ? children : <Navigate to={"/login"} />;
 };
 

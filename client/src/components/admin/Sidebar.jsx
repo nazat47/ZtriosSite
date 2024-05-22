@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { CgMenuLeft } from "react-icons/cg";
 
-const Sidebar = () => {
+const Sidebar = ({ active }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const ref = useRef(null);
 
@@ -18,12 +18,22 @@ const Sidebar = () => {
   return (
     <>
       <div className="hidden sm:block min-h-screen w-[200px] shadow-2xl">
-        <div className="p-3 flex items-start justify-center">
+        <div className="p-3 flex flex-col gap-2 items-start justify-center">
           <Link
-            to={"/dashboard"}
-            className="font-semibold text-purple-600 h-[50px] hover:bg-gray-100 rounded w-full flex items-center justify-center hover:text-lg transition-all"
+            to={"/dashboard/blogs"}
+            className={`font-semibold ${
+              active === 1 ? "text-purple-600" : "text-gray-900"
+            } h-[50px] hover:bg-gray-100 rounded w-full flex items-center justify-center hover:text-lg transition-all`}
           >
             <p>Blogs</p>
+          </Link>
+          <Link
+            to={"/dashboard/case-study"}
+            className={`font-semibold ${
+              active === 2 ? "text-purple-600" : "text-gray-900"
+            } h-[50px] hover:bg-gray-100 rounded w-full flex items-center justify-center hover:text-lg transition-all`}
+          >
+            <p>Case Study</p>
           </Link>
         </div>
       </div>
@@ -44,7 +54,7 @@ const Sidebar = () => {
             sidebarOpen ? "translate-x-0" : "-translate-x-full"
           }`}
         >
-          <div className="p-3 flex items-start justify-center">
+          <div className="p-3 flex flex-col items-start justify-center">
             <Link
               to={"/dashboard"}
               className="font-semibold text-purple-600 h-[50px] hover:bg-gray-100 rounded w-full flex items-center justify-center hover:text-lg transition-all"

@@ -1,12 +1,12 @@
 import React from "react";
 import Sidebar from "../../components/admin/Sidebar";
-import AdminBlogs from "../../components/admin/AdminBlogs";
+import Dashboard from "../../components/admin/Dashboard";
 
 const AdminDashboard = () => {
   return (
     <div className="flex flex-col sm:flex-row gap-2 w-full">
       <Sidebar />
-      <AdminBlogs />
+      <Dashboard />
     </div>
   );
 };

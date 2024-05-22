@@ -7,10 +7,13 @@ import Services from "./pages/Services";
 import CaseStudy from "./pages/CaseStudy";
 import Blogs from "./pages/Blogs";
 import Layout from "./components/layout/Layout";
-import BlogDetails from "./components/BlogDetails";
+import BlogDetails from "./pages/BlogDetails";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminLogin from "./pages/admin/AdminLogin";
 import AdminProtected from "./protected/AdminProtected";
+import AdminBlogs from "./pages/admin/AdminBlogs";
+import AdminCaseStudy from "./pages/admin/AdminCaseStudy";
+import CaseStudyDetails from "./pages/CaseStudyDetails";
 
 function App() {
   return (
@@ -71,6 +74,30 @@ function App() {
               <AdminProtected>
                 <AdminDashboard />
               </AdminProtected>
+            }
+          />
+          <Route
+            path="/dashboard/blogs"
+            element={
+              <AdminProtected>
+                <AdminBlogs />
+              </AdminProtected>
+            }
+          />
+          <Route
+            path="/dashboard/case-study"
+            element={
+              <AdminProtected>
+                <AdminCaseStudy />
+              </AdminProtected>
+            }
+          />
+          <Route
+            path="/casestudy/:id"
+            element={
+              <Layout>
+                <CaseStudyDetails />
+              </Layout>
             }
           />
           <Route path="/login" element={<AdminLogin />} />

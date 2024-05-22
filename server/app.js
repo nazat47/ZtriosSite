@@ -7,6 +7,7 @@ const routeNotFound = require("./middlewares/routeNotFound");
 const errorHandler = require("./middlewares/errorHandler");
 const userRoute = require("./routes/user");
 const blogsRoute = require("./routes/blogs");
+const caseStudyRoute = require("./routes/caseStudy");
 const rateLimit = require("express-rate-limit");
 const helmet = require("helmet");
 const mongoSanitize = require("express-mongo-sanitize");
@@ -45,6 +46,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/v1/user", userRoute);
 app.use("/api/v1/blogs", blogsRoute);
+app.use("/api/v1/case-study", caseStudyRoute);
 
 app.use(routeNotFound);
 app.use(errorHandler);

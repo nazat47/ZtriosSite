@@ -1,24 +1,25 @@
-import React, { useState } from "react";
-import { MdClose } from "react-icons/md";
-import { RiImageAddFill } from "react-icons/ri";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Controller, useForm } from "react-hook-form";
+import React, { useEffect, useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import { MdClose } from "react-icons/md";
+import { RiImageAddFill } from "react-icons/ri";
+import { Controller, useForm } from "react-hook-form";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
-import { routeUrl } from "../../utils/links";
+import { baseUrl, routeUrl } from "../../../utils/links";
 import { toast } from "react-toastify";
 
-const AddBlog = ({ addOpen, setAddOpen }) => {
+const EditBlog = ({ editOpen, setEditOpen, blog }) => {
   const {
     register,
     handleSubmit,
     control,
+    getValues,
+    setValue,
     formState: { errors, isSubmitting },
     reset: formReset,
   } = useForm();
   const [file, setFile] = useState(null);
-  const [errorMsg, setErrorMsg] = useState(null);
   const queryClient = useQueryClient();
 
   const modules = {
@@ -56,50 +57,54 @@ const AddBlog = ({ addOpen, setAddOpen }) => {
   ];
   const handleImage = (e) => {
     setFile(e.target.files[0]);
-    setErrorMsg(null);
   };
 
   const { mutate, isPending, reset } = useMutation({
     mutationFn: async (forms) => {
       try {
-        await axios.post(`${routeUrl}/blogs`, forms, {
+        await axios.put(`${routeUrl}/blogs/${blog?.id}`, forms, {
           withCredentials: true,
         });
       } catch (error) {
-        toast.error(error?.response?.data?.msg || "Something went wrong");
+        toast.error(error?.response?.data?.msg || "Something went wrong")
       }
     },
     onSuccess: () => {
       reset();
-      setAddOpen(false);
+      setEditOpen(false);
       queryClient.invalidateQueries({
         queryKey: ["blogs"],
       });
     },
   });
+
   const onSubmit = (data) => {
-    if (!file) {
-      setErrorMsg("Please upload blog image");
-    } else {
-      const formsData = new FormData();
-      formsData.append("title", data?.title);
-      formsData.append("text", data?.text);
-      formsData.append("subTitle", data?.subTitle);
-      formsData.append("image", file);
-      mutate(formsData);
-      setFile(null);
-      formReset();
-    }
-  };
-  const handleClose = () => {
-    setAddOpen(false);
+    const forms = new FormData();
+    forms.append("title", data?.title);
+    forms.append("text", data?.text);
+    forms.append("subTitle", data?.subTitle);
+    if (file) forms.append("image", file);
+    mutate(forms);
     setFile(null);
     formReset();
   };
+  const handleClose = () => {
+    setEditOpen(false);
+    setFile(null);
+    formReset();
+  };
+
+  useEffect(() => {
+    setValue("title", blog?.title);
+    setValue("subTitle", blog?.subTitle);
+    setValue("text", blog?.text);
+    // eslint-disable-next-line 
+  }, [blog]);
+
   return (
     <div
       className={`fixed inset-0  items-center justify-center bg-[#00000042] z-[5] transition-all duration-300 ${
-        addOpen ? "flex" : "hidden"
+        editOpen ? "flex" : "hidden"
       }`}
     >
       <div
@@ -107,17 +112,22 @@ const AddBlog = ({ addOpen, setAddOpen }) => {
       >
         <MdClose
           className="absolute top-2 right-2 cursor-pointer size-[25px] md:size-[35px]"
-          onClick={handleClose}
+          onClick={() => handleClose()}
+          size={30}
         />
         <div className="overflow-y-auto max-h-[80vh] mt-12">
           <h1 className="font-bold text-lg md:text-2xl text-center">
-            Add Blog
+            Edit Blog
           </h1>
           <div className="my-6 flex flex-col items-start justify-center gap-4 min-h-[80vh] px-2 md:px-6">
-            {file && (
+            {(file || blog?.imageUrl) && (
               <div className="relative group w-full h-auto">
                 <img
-                  src={URL.createObjectURL(file)}
+                  src={
+                    file
+                      ? URL.createObjectURL(file)
+                      : `${baseUrl}/${blog?.imageUrl}`
+                  }
                   alt="blog"
                   className="w-[100%] md:w-[80%] h-[200px] rounded group-hover:brightness-50 mx-auto shadow-lg border border-gray-200"
                 />
@@ -167,8 +177,8 @@ const AddBlog = ({ addOpen, setAddOpen }) => {
                 }}
                 render={({ field }) => (
                   <ReactQuill
-                    {...field}
                     onChange={(value) => field.onChange(value)}
+                    value={getValues("text")}
                     modules={modules}
                     formats={formats}
                     theme="snow"
@@ -177,19 +187,17 @@ const AddBlog = ({ addOpen, setAddOpen }) => {
                   />
                 )}
               />
-              {errorMsg && <p className="text-red-600">{errorMsg}</p>}
               <label
-                htmlFor="file"
+                htmlFor="edit"
                 className="w-full h-[50px] bg-gray-200 rounded-lg p-3 cursor-pointer flex justify-between items-center"
               >
                 <p className="font-semibold text-gray-600 text-lg">Add Image</p>
                 <RiImageAddFill size={35} className="text-gray-700" />
               </label>
               <input
-                {...register("image")}
                 onChange={handleImage}
                 hidden
-                id="file"
+                id="edit"
                 type="file"
                 accept="images/*"
                 name="image"
@@ -202,7 +210,7 @@ const AddBlog = ({ addOpen, setAddOpen }) => {
                   isPending || isSubmitting ? "cursor-not-allowed" : ""
                 }`}
               >
-                Add
+                Update
               </button>
             </form>
           </div>
@@ -212,4 +220,4 @@ const AddBlog = ({ addOpen, setAddOpen }) => {
   );
 };
 
-export default AddBlog;
+export default EditBlog;

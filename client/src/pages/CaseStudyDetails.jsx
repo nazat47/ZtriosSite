@@ -5,16 +5,15 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import axios from "axios";
 import { baseUrl, routeUrl } from "../utils/links";
-import BlogDetailsSkeleton from "./skeletons/BlogDetailsSkeleton";
-import RelatedBlogs from "./RelatedBlogs";
+import BlogDetailsSkeleton from "../components/skeletons/BlogDetailsSkeleton";
 
-const BlogDetails = () => {
+const CaseStudyDetails = () => {
   const { id } = useParams();
-  const { data: blogData, isLoading } = useQuery({
-    queryKey: ["blog", { id }],
+  const { data: caseStudyData, isLoading } = useQuery({
+    queryKey: ["case-study", { id }],
     queryFn: async () => {
       try {
-        const { data } = await axios.get(`${routeUrl}/blogs/${id}`);
+        const { data } = await axios.get(`${routeUrl}/case-study/${id}`);
         return data;
       } catch (error) {
         console.log(error);
@@ -33,27 +32,23 @@ const BlogDetails = () => {
       ) : (
         <div className="flex flex-col items-center gap-6 sm:gap-4 xl:gap-8 min-h-[50vh] w-full">
           <h1 className="font-bold text-[25px] sm:text-[30px] lg:text-[40px] xl:text-[50px]">
-            {blogData?.title}
+            {caseStudyData?.title}
           </h1>
           <img
-            src={`${baseUrl}/${blogData?.imageUrl}`}
+            src={`${baseUrl}/${caseStudyData?.imageUrl}`}
             alt="blog"
             className="w-full h-[40vh] lg:h-[50vh] rounded"
           />
           <ReactQuill
-            value={blogData?.text}
+            value={caseStudyData?.text}
             theme="bubble"
             readOnly={true}
             className="w-full"
           />
         </div>
       )}
-      <div className="flex flex-col items-center justify-center w-full mt-[100px]">
-        <h1 className="font-bold text-[30px] md:text-[40px]">Related Blogs </h1>
-        <RelatedBlogs id={blogData?._id}/>
-      </div>
     </div>
   );
 };
 
-export default BlogDetails;
+export default CaseStudyDetails;
