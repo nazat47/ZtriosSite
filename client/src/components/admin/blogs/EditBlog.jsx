@@ -1,60 +1,25 @@
 import React, { useEffect, useState } from "react";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
 import { MdClose } from "react-icons/md";
 import { RiImageAddFill } from "react-icons/ri";
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { baseUrl, routeUrl } from "../../../utils/links";
 import { toast } from "react-toastify";
+import TextEditor from "../../TextEditor";
 
 const EditBlog = ({ editOpen, setEditOpen, blog }) => {
   const {
     register,
     handleSubmit,
-    control,
-    getValues,
     setValue,
     formState: { errors, isSubmitting },
     reset: formReset,
   } = useForm();
+  const [description, setDescription] = useState("");
   const [file, setFile] = useState(null);
   const queryClient = useQueryClient();
 
-  const modules = {
-    toolbar: [
-      [{ header: "1" }, { header: "2" }, { font: [] }],
-      [{ size: ["small", false, "large", "huge"] }],
-      [{ list: "ordered" }, { list: "bullet" }],
-      ["bold", "italic", "underline", "strike", "blockquote"],
-      [{ script: "sub" }, { script: "super" }],
-      [{ color: [] }, { background: [] }],
-      [{ align: [] }],
-      ["link"],
-      ["clean"],
-    ],
-  };
-
-  const formats = [
-    "header",
-    "size",
-    "font",
-    "list",
-    "bullet",
-    "bold",
-    "italic",
-    "underline",
-    "strike",
-    "blockquote",
-    "script",
-    "sub",
-    "super",
-    "color",
-    "background",
-    "align",
-    "link",
-  ];
   const handleImage = (e) => {
     setFile(e.target.files[0]);
   };
@@ -81,12 +46,13 @@ const EditBlog = ({ editOpen, setEditOpen, blog }) => {
   const onSubmit = (data) => {
     const forms = new FormData();
     forms.append("title", data?.title);
-    forms.append("text", data?.text);
+    forms.append("text", description);
     forms.append("subTitle", data?.subTitle);
     if (file) forms.append("image", file);
     mutate(forms);
     setFile(null);
     formReset();
+    setDescription("")
   };
   const handleClose = () => {
     setEditOpen(false);
@@ -97,7 +63,7 @@ const EditBlog = ({ editOpen, setEditOpen, blog }) => {
   useEffect(() => {
     setValue("title", blog?.title);
     setValue("subTitle", blog?.subTitle);
-    setValue("text", blog?.text);
+    setDescription(blog?.text)
     // eslint-disable-next-line 
   }, [blog]);
 
@@ -166,27 +132,7 @@ const EditBlog = ({ editOpen, setEditOpen, blog }) => {
                 placeholder="Short Description"
                 className="p-3 w-full rounded border border-gray-200 outline-purple-200"
               />
-              {errors?.text && (
-                <p className="text-red-600">* {errors?.text?.message}</p>
-              )}
-              <Controller
-                name="text"
-                control={control}
-                rules={{
-                  required: "Blog Description is required",
-                }}
-                render={({ field }) => (
-                  <ReactQuill
-                    onChange={(value) => field.onChange(value)}
-                    value={getValues("text")}
-                    modules={modules}
-                    formats={formats}
-                    theme="snow"
-                    placeholder="Description"
-                    className="h-[400px] lg:h-[300px] mb-[120px] md:mb-[70px] xl:mb-12"
-                  />
-                )}
-              />
+              <TextEditor description={description} setDescription={setDescription} />
               <label
                 htmlFor="edit"
                 className="w-full h-[50px] bg-gray-200 rounded-lg p-3 cursor-pointer flex justify-between items-center"

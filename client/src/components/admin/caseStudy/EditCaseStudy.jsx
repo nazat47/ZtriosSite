@@ -1,6 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
+import React, { useEffect, useState } from "react";
 import { MdClose } from "react-icons/md";
 import { RiImageAddFill } from "react-icons/ri";
 import { useForm } from "react-hook-form";
@@ -8,6 +6,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { baseUrl, routeUrl } from "../../../utils/links";
 import { toast } from "react-toastify";
+import TextEditor from "../../TextEditor";
 
 const EditCaseStudy = ({ editOpen, setEditOpen, caseStudy }) => {
   const {
@@ -17,83 +16,10 @@ const EditCaseStudy = ({ editOpen, setEditOpen, caseStudy }) => {
     formState: { errors, isSubmitting },
     reset: formReset,
   } = useForm();
-
-  const quillRef = useRef();
-  const [quillValue, setQuillValue] = useState("");
+  const [description, setDescription] = useState("");
   const [file, setFile] = useState(null);
   const queryClient = useQueryClient();
 
-  const imageHandler = () => {
-    const input = document.createElement("input");
-    input.setAttribute("type", "file");
-    input.setAttribute("accept", "image/*");
-    input.click();
-
-    input.onchange = async () => {
-      const file = input.files[0];
-      const formData = new FormData();
-      formData.append("image", file);
-      try {
-        const { data } = await axios.post(
-          `${routeUrl}/case-study/upload`,
-          formData,
-          {
-            withCredentials: true,
-          }
-        );
-        const imageUrl = data?.imageUrl;
-        const quill = quillRef.current.getEditor();
-        const range = quill.getSelection();
-        quill.insertEmbed(range.index, "image", `${baseUrl}/${imageUrl}`);
-      } catch (error) {
-        toast.error(error?.response?.data?.msg || "Image upload failed");
-      }
-    };
-  };
-
-  const modules = useMemo(
-    () => ({
-      toolbar: {
-        container: [
-          [{ header: "1" }, { header: "2" }, { font: [] }],
-          [{ size: ["small", false, "large", "huge"] }],
-          [{ list: "ordered" }, { list: "bullet" }],
-          ["bold", "italic", "underline", "strike", "blockquote"],
-          [{ script: "sub" }, { script: "super" }],
-          [{ color: [] }, { background: [] }],
-          [{ align: [] }],
-          ["link", "image"],
-          ["clean"],
-        ],
-        handlers: {
-          image: imageHandler,
-        },
-      },
-    }),
-    // eslint-disable-next-line
-    []
-  );
-
-  const formats = [
-    "header",
-    "size",
-    "font",
-    "list",
-    "bullet",
-    "bold",
-    "italic",
-    "underline",
-    "strike",
-    "blockquote",
-    "script",
-    "sub",
-    "super",
-    "color",
-    "background",
-    "align",
-    "link",
-    "image",
-  ];
   const handleImage = (e) => {
     setFile(e.target.files[0]);
   };
@@ -120,12 +46,13 @@ const EditCaseStudy = ({ editOpen, setEditOpen, caseStudy }) => {
   const onSubmit = (data) => {
     const forms = new FormData();
     forms.append("title", data?.title);
-    forms.append("text", quillValue);
+    forms.append("text", description);
     forms.append("subTitle", data?.subTitle);
     if (file) forms.append("image", file);
     mutate(forms);
     setFile(null);
     formReset();
+    setDescription("")
   };
   const handleClose = () => {
     setEditOpen(false);
@@ -136,7 +63,7 @@ const EditCaseStudy = ({ editOpen, setEditOpen, caseStudy }) => {
   useEffect(() => {
     setValue("title", caseStudy?.title);
     setValue("subTitle", caseStudy?.subTitle);
-    setQuillValue(caseStudy?.text);
+    setDescription(caseStudy?.text);
     // eslint-disable-next-line
   }, [caseStudy]);
 
@@ -207,18 +134,8 @@ const EditCaseStudy = ({ editOpen, setEditOpen, caseStudy }) => {
               />
               {errors?.text && (
                 <p className="text-red-600">* {errors?.text?.message}</p>
-              )}
-              <ReactQuill
-                ref={quillRef}
-                onChange={(value) => setQuillValue(value)}
-                value={quillValue}
-                modules={modules}
-                formats={formats}
-                theme="snow"
-                placeholder="Description"
-                className="h-[400px] lg:h-[300px] mb-[120px] md:mb-[70px] xl:mb-12"
-              />
-
+              )}      
+              <TextEditor description={description} setDescription={setDescription} />
               <label
                 htmlFor="editCaseStudy"
                 className="w-full h-[50px] bg-gray-200 rounded-lg p-3 cursor-pointer flex justify-between items-center"

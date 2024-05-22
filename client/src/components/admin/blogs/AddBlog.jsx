@@ -2,58 +2,24 @@ import React, { useState } from "react";
 import { MdClose } from "react-icons/md";
 import { RiImageAddFill } from "react-icons/ri";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Controller, useForm } from "react-hook-form";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
+import { useForm } from "react-hook-form";
 import axios from "axios";
 import { routeUrl } from "../../../utils/links";
 import { toast } from "react-toastify";
+import TextEditor from "../../TextEditor";
 
 const AddBlog = ({ addOpen, setAddOpen }) => {
   const {
     register,
     handleSubmit,
-    control,
     formState: { errors, isSubmitting },
     reset: formReset,
   } = useForm();
+  const [description, setDescription] = useState("");
   const [file, setFile] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
   const queryClient = useQueryClient();
 
-  const modules = {
-    toolbar: [
-      [{ header: "1" }, { header: "2" }, { font: [] }],
-      [{ size: ["small", false, "large", "huge"] }],
-      [{ list: "ordered" }, { list: "bullet" }],
-      ["bold", "italic", "underline", "strike", "blockquote"],
-      [{ script: "sub" }, { script: "super" }],
-      [{ color: [] }, { background: [] }],
-      [{ align: [] }],
-      ["link"],
-      ["clean"],
-    ],
-  };
-
-  const formats = [
-    "header",
-    "size",
-    "font",
-    "list",
-    "bullet",
-    "bold",
-    "italic",
-    "underline",
-    "strike",
-    "blockquote",
-    "script",
-    "sub",
-    "super",
-    "color",
-    "background",
-    "align",
-    "link",
-  ];
   const handleImage = (e) => {
     setFile(e.target.files[0]);
     setErrorMsg(null);
@@ -83,12 +49,13 @@ const AddBlog = ({ addOpen, setAddOpen }) => {
     } else {
       const formsData = new FormData();
       formsData.append("title", data?.title);
-      formsData.append("text", data?.text);
+      formsData.append("text", description);
       formsData.append("subTitle", data?.subTitle);
       formsData.append("image", file);
       mutate(formsData);
       setFile(null);
       formReset();
+      setDescription("")
     }
   };
   const handleClose = () => {
@@ -156,27 +123,7 @@ const AddBlog = ({ addOpen, setAddOpen }) => {
                 placeholder="Short Description"
                 className="p-3 w-full rounded border border-gray-200 outline-purple-200"
               />
-              {errors?.text && (
-                <p className="text-red-600">* {errors?.text?.message}</p>
-              )}
-              <Controller
-                name="text"
-                control={control}
-                rules={{
-                  required: "Blog Description is required",
-                }}
-                render={({ field }) => (
-                  <ReactQuill
-                    {...field}
-                    onChange={(value) => field.onChange(value)}
-                    modules={modules}
-                    formats={formats}
-                    theme="snow"
-                    placeholder="Description"
-                    className="h-[400px] lg:h-[300px] mb-[120px] md:mb-[70px] xl:mb-12"
-                  />
-                )}
-              />
+              <TextEditor description={description} setDescription={setDescription} />
               {errorMsg && <p className="text-red-600">{errorMsg}</p>}
               <label
                 htmlFor="file"
