@@ -17,12 +17,13 @@ const AddBlog = ({ addOpen, setAddOpen }) => {
   } = useForm();
   const [description, setDescription] = useState("");
   const [file, setFile] = useState(null);
-  const [errorMsg, setErrorMsg] = useState(null);
+  const [fileErrorMsg, setFileErrorMsg] = useState(null);
+  const [descErrorMsg, setDescErrorMsg] = useState(null);
   const queryClient = useQueryClient();
 
   const handleImage = (e) => {
     setFile(e.target.files[0]);
-    setErrorMsg(null);
+    setFileErrorMsg(null);
   };
 
   const { mutate, isPending, reset } = useMutation({
@@ -44,8 +45,11 @@ const AddBlog = ({ addOpen, setAddOpen }) => {
     },
   });
   const onSubmit = (data) => {
-    if (!file) {
-      setErrorMsg("Please upload blog image");
+    if(description.length === 0){
+      setDescErrorMsg("Description is required")
+    }
+    else if (!file) {
+      setFileErrorMsg("Please upload blog image");
     } else {
       const formsData = new FormData();
       formsData.append("title", data?.title);
@@ -123,8 +127,9 @@ const AddBlog = ({ addOpen, setAddOpen }) => {
                 placeholder="Short Description"
                 className="p-3 w-full rounded border border-gray-200 outline-purple-200"
               />
+              {descErrorMsg && <p className="text-red-600">{descErrorMsg}</p>}
               <TextEditor description={description} setDescription={setDescription} />
-              {errorMsg && <p className="text-red-600">{errorMsg}</p>}
+              {fileErrorMsg && <p className="text-red-600">{fileErrorMsg}</p>}
               <label
                 htmlFor="file"
                 className="w-full h-[50px] bg-gray-200 rounded-lg p-3 cursor-pointer flex justify-between items-center"

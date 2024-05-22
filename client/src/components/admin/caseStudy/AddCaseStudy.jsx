@@ -18,12 +18,13 @@ const AddCaseStudy = ({ addOpen, setAddOpen }) => {
 
   const [file, setFile] = useState(null);
   const [description, setDescription] = useState("");
-  const [errorMsg, setErrorMsg] = useState(null);
+  const [fileErrorMsg, setFileErrorMsg] = useState(null);
+  const [descErrorMsg, setDescErrorMsg] = useState(null);
   const queryClient = useQueryClient();
 
   const handleImage = (e) => {
     setFile(e.target.files[0]);
-    setErrorMsg(null);
+    setFileErrorMsg(null);
   };
 
   const { mutate, isPending, reset } = useMutation({
@@ -45,8 +46,11 @@ const AddCaseStudy = ({ addOpen, setAddOpen }) => {
     },
   });
   const onSubmit = (data) => {
-    if (!file) {
-      setErrorMsg("Please upload case study image");
+    if( description.length === 0 ){
+      setDescErrorMsg("Description is required")
+    }
+    else if (!file) {
+      setFileErrorMsg("Please upload blog image");
     } else {
       const formsData = new FormData();
       formsData.append("title", data?.title);
@@ -124,14 +128,12 @@ const AddCaseStudy = ({ addOpen, setAddOpen }) => {
                 placeholder="Short Description"
                 className="p-3 w-full rounded border border-gray-200 outline-purple-200"
               />
-              {errors?.text && (
-                <p className="text-red-600">* {errors?.text?.message}</p>
-              )}
+              {descErrorMsg && <p className="text-red-600">{descErrorMsg}</p>}
               <TextEditor
                 description={description}
                 setDescription={setDescription}
               />
-              {errorMsg && <p className="text-red-600">{errorMsg}</p>}
+              {fileErrorMsg && <p className="text-red-600">{fileErrorMsg}</p>}
               <label
                 htmlFor="caseStudyFile"
                 className="w-full h-[50px] bg-gray-200 rounded-lg p-3 cursor-pointer flex justify-between items-center"

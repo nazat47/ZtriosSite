@@ -17,6 +17,7 @@ const EditBlog = ({ editOpen, setEditOpen, blog }) => {
     reset: formReset,
   } = useForm();
   const [description, setDescription] = useState("");
+  const [descErrorMsg, setDescErrorMsg] = useState(null);
   const [file, setFile] = useState(null);
   const queryClient = useQueryClient();
 
@@ -44,15 +45,19 @@ const EditBlog = ({ editOpen, setEditOpen, blog }) => {
   });
 
   const onSubmit = (data) => {
-    const forms = new FormData();
-    forms.append("title", data?.title);
-    forms.append("text", description);
-    forms.append("subTitle", data?.subTitle);
-    if (file) forms.append("image", file);
-    mutate(forms);
-    setFile(null);
-    formReset();
-    setDescription("")
+    if( description.length === 0 ) {
+      setDescErrorMsg("Description is required")
+    } else {
+        const forms = new FormData();
+        forms.append("title", data?.title);
+        forms.append("text", description);
+        forms.append("subTitle", data?.subTitle);
+        if (file) forms.append("image", file);
+        mutate(forms);
+        setFile(null);
+        formReset();
+        setDescription("")
+    }
   };
   const handleClose = () => {
     setEditOpen(false);
@@ -132,6 +137,7 @@ const EditBlog = ({ editOpen, setEditOpen, blog }) => {
                 placeholder="Short Description"
                 className="p-3 w-full rounded border border-gray-200 outline-purple-200"
               />
+              {descErrorMsg && <p className="text-red-600">{descErrorMsg}</p>}
               <TextEditor description={description} setDescription={setDescription} />
               <label
                 htmlFor="edit"

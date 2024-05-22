@@ -17,6 +17,7 @@ const EditCaseStudy = ({ editOpen, setEditOpen, caseStudy }) => {
     reset: formReset,
   } = useForm();
   const [description, setDescription] = useState("");
+  const [descErrorMsg, setDescErrorMsg] = useState(null);
   const [file, setFile] = useState(null);
   const queryClient = useQueryClient();
 
@@ -44,15 +45,19 @@ const EditCaseStudy = ({ editOpen, setEditOpen, caseStudy }) => {
   });
 
   const onSubmit = (data) => {
-    const forms = new FormData();
-    forms.append("title", data?.title);
-    forms.append("text", description);
-    forms.append("subTitle", data?.subTitle);
-    if (file) forms.append("image", file);
-    mutate(forms);
-    setFile(null);
-    formReset();
-    setDescription("")
+    if( description.length === 0 ) {
+      setDescErrorMsg("Description is required")
+    } else {
+        const forms = new FormData();
+        forms.append("title", data?.title);
+        forms.append("text", description);
+        forms.append("subTitle", data?.subTitle);
+        if (file) forms.append("image", file);
+        mutate(forms);
+        setFile(null);
+        formReset();
+        setDescription("")
+    }
   };
   const handleClose = () => {
     setEditOpen(false);
@@ -135,6 +140,7 @@ const EditCaseStudy = ({ editOpen, setEditOpen, caseStudy }) => {
               {errors?.text && (
                 <p className="text-red-600">* {errors?.text?.message}</p>
               )}      
+              {descErrorMsg && <p className="text-red-600">{descErrorMsg}</p>}
               <TextEditor description={description} setDescription={setDescription} />
               <label
                 htmlFor="editCaseStudy"
